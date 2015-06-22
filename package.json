@@ -1,0 +1,36 @@
+{
+  "name": "angular-dynamic-forms",
+  "version": "0.0.1",
+  "description": "A model-driven forms framework for AngularJS. The concept behind this is to isolate the logic of our models for testing purposes and allow us to present the model in different views based off this.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/brianfoody/angular-dynamic-forms"
+  },
+  "keywords": [
+    "angular",
+    "forms",
+    "model-driven",
+    "help",
+    "validation",
+    "gulp",
+    "functional"
+  ],
+  "author": "Brian Foody",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^1.2.0",
+    "event-stream": "^3.3.1",
+    "gulp": "^3.9.0",
+    "gulp-angular-templatecache": "^1.6.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-ng-annotate": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "run-sequence": "^1.1.1"
+  }
+}

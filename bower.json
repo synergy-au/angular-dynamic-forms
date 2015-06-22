@@ -1,0 +1,32 @@
+{
+  "name": "angular-dynamic-forms",
+  "version": "0.0.1",
+  "authors": [
+    "Brian Foody <brianfoody@gmail.com>"
+  ],
+  "description": "A model-driven forms framework for AngularJS. The concept behind this is to isolate the logic of our models for testing purposes and allow us to present the model in different views based off this.",
+  "main": "dist/angular-dynamic-forms.min.js",
+  "keywords": [
+    "angular",
+    "forms",
+    "model-driven",
+    "help",
+    "validation",
+    "gulp",
+    "functional"
+  ],
+  "license": "MIT",
+  "homepage": "github.com/brianfoody/angular-dynamic-forms",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0",
+    "lodash": ">=3.8.0",
+    "moment": ">=2.10.0"
+  }
+}
