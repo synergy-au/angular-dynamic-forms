@@ -1,0 +1,45 @@
+.df-form-group {
+    position:relative;
+    clear: both;
+}
+
+.df-form-input {
+    float:left;
+}
+
+.extra-help, .validation-message {
+    visibility: hidden;
+    clear:right;
+}
+
+.df-form-input:active + .messages > .extra-help,
+.df-form-input:focus + .messages > .extra-help {
+    visibility: visible;
+}
+
+.df-form-input.ng-dirty.ng-invalid + .messages > .validation-message {
+    visibility: visible;
+}
+
+.df-form-input[disabled] {
+    background-color: white;
+    border: none;
+}
+
+.df-form-input-label {
+    position:absolute;
+    top: 0px;
+    left:150px;
+}
+.df-form-input-label:before {
+    content: "?";
+}
+
+.df-form-input:active + .messages > .df-form-input-label,
+.df-form-input:focus + .messages > .df-form-input-label {
+    color:blue;
+}
+.df-form-input:active + .messages > .df-form-input-label:before,
+.df-form-input:focus + .messages > .df-form-input-label:before {
+    content: "x";
+}

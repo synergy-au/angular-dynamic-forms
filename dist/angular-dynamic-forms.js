@@ -1,39 +1,20 @@
 angular.module('dynamicForms', [])
-angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/column.html","<div df-column=\"<%= column %>\" sy-form-group data-layout=\"<%= layout %>\">\r\n    <label df-label>\r\n    </label>\r\n    <div>\r\n        <input class=\"df-form-input\" df-input />\r\n        <div class=\"messages\">\r\n            <div class=\"df-form-input-label\"></div>\r\n            <div df-help></div>\r\n            <div df-validation></div>\r\n        </div>\r\n    </div>\r\n</div>");}]);
-// TODO Contain all logic in here.
-angular.module('dynamicForms').service('DfSchemaService', function ($injector) {
-    this.extractColumns = function(schema) {
-        this.schema = $injector.get(schema);
-        return _.map(this.schema, function(it){
-            return { column: it.column, template: it.template };
-        });
-    };
 
-    this.extractColumn = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.find(this.schema, {column: column});
-    };
+angular.element.prototype.closestAttribute = function (attr) {
 
-    this.extractValidators = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('validators').value().pop();
-    };
+    var self = this;
 
-    this.extractValidation = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('validation').value().pop();
-    };
+    if (!self.parent() || self.parent()[0].nodeName.toLowerCase() === 'body') {
+        return undefined;
+    }
 
-    this.extractLabel = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('label').value().pop();
-    };
-
-    this.extractHelp = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('help').value().pop();
-    };
-});
+    if (self.parent().attr(attr)) {
+        return self.parent().attr(attr);
+    } else {
+        return self.parent().closestAttribute(attr);
+    }
+};
+angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/column.html","<div df-column=\"<%= column %>\" df-form-group data-layout=\"<%= layout %>\">\r\n    <label df-label>\r\n    </label>\r\n    <div>\r\n        <input class=\"df-form-input\" df-input />\r\n        <div class=\"messages\">\r\n            <div class=\"df-form-input-label\"></div>\r\n            <div df-help></div>\r\n            <div df-validation></div>\r\n        </div>\r\n    </div>\r\n</div>");}]);
 angular.module('dynamicForms').directive('dfFormInput', function(DfSchemaService) {
     return {
         restrict: 'C',
@@ -150,4 +131,38 @@ angular.module('dynamicForms').directive('dfValidation', function($compile, DfSc
             element.append(validation);
         }
     }
+});
+// TODO Contain all logic in here.
+angular.module('dynamicForms').service('DfSchemaService', function ($injector) {
+    this.extractColumns = function(schema) {
+        this.schema = $injector.get(schema);
+        return _.map(this.schema, function(it){
+            return { column: it.column, template: it.template };
+        });
+    };
+
+    this.extractColumn = function(schema, column) {
+        this.schema = $injector.get(schema);
+        return _.find(this.schema, {column: column});
+    };
+
+    this.extractValidators = function(schema, column) {
+        this.schema = $injector.get(schema);
+        return _.chain(this.schema).where({column: column}).pluck('validators').value().pop();
+    };
+
+    this.extractValidation = function(schema, column) {
+        this.schema = $injector.get(schema);
+        return _.chain(this.schema).where({column: column}).pluck('validation').value().pop();
+    };
+
+    this.extractLabel = function(schema, column) {
+        this.schema = $injector.get(schema);
+        return _.chain(this.schema).where({column: column}).pluck('label').value().pop();
+    };
+
+    this.extractHelp = function(schema, column) {
+        this.schema = $injector.get(schema);
+        return _.chain(this.schema).where({column: column}).pluck('help').value().pop();
+    };
 });
