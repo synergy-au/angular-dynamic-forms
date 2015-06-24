@@ -1,28 +1,12 @@
-.df-form-group {
-    position:relative;
-    clear: both;
-}
-
-.df-form-input, .df-help {
-    float:left;
-    width:50% !important;
-}
-
-.df-help {
-    visibility:hidden;
-}
-
-.df-validation {
-    clear:left;
-    display: none;
-}
-
+/*
+    Show the help when the field is active and show the validation when the field is invalid.
+*/
 .df-input:active + .messages > .df-help,
 .df-input:focus + .messages > .df-help {
     visibility:visible;
 }
 
-.df-input.ng-dirty.ng-invalid + .messages > .df-validation{
+.df-input.ng-dirty.ng-invalid + .messages > .df-validation {
     display: block;
 }
 

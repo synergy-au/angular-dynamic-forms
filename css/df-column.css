@@ -6,6 +6,7 @@ Read - label to the side, input
 */
 
 .df-column {
+    position:relative;  /*We can absolute position child elements*/
     padding: 15px;
 }
 
@@ -18,6 +19,15 @@ Read - label to the side, input
 .df-input, .df-label, .df-edit, .df-help, .df-validation {
     box-sizing: border-box;
     float: left;
+}
+
+.df-help {
+    visibility:hidden;
+}
+
+.df-validation {
+    clear:left;
+    display: none;
 }
 
  /*Write mode*/
@@ -55,16 +65,32 @@ Read - label to the side, input
 .df-column-edit .df-edit {
     display: none;
 }
+.df-edit-button {
+    float: right;
+}
+
+.df-column-edit .df-input,
 .df-column-edit .df-help,
 .df-column-edit .df-validation {
     width:35%;
+}
+
+.df-column-edit .df-validation {
+    margin-left:30%;
 }
 
 .df-column-edit .df-edit-controls {
     display:block;
 }
 
+.df-column-write .df-edit-controls,
+.df-column-read .df-edit-controls {
+    display: none;
+}
+
+/* Edit controls */
 .df-edit-controls {
+    clear:both;
     padding-left: 30%;
 }
 
@@ -74,3 +100,4 @@ Read - label to the side, input
 .df-edit-controls .df-save-edit {
     float: right;
 }
+

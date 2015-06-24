@@ -13,9 +13,14 @@
 
     <div ng-app="payment" style="width: 550px">
 
-        <form method="post">
+        <form method="post" ng-controller="PayController as payCtrl">
 
-            <div ng-form="paymentForm" df-model df-schema="PaymentModel" df-mode="read"></div>
+            <div ng-form="paymentForm"
+                 df-model
+                 df-schema="PaymentModel"
+                 df-controller="payCtrl"
+                 df-model-instance="payCtrl.model"
+                 df-mode="read"></div>
 
         </form>
 

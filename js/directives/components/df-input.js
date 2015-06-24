@@ -15,9 +15,9 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 
             element.removeAttr('df-input');
             var input;
-            if ((columnDefinition && columnDefinition['type']) == 'select') {
+            if ((columnDefinition && columnDefinition['type']) === 'select') {
                 input = angular.element('<select class="df-input"></select>');
-                element.replaceWith(input)
+                element.replaceWith(input);
             } else {
                 input = element;
             }
@@ -26,12 +26,12 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
                 input.attr(key, _.template(val)({controller: controller, model: model}));
             });
 
-            input.attr( 'ng-required', (validators && validators['ng-required']) || 'true');
-            input.attr( 'type', (columnDefinition && columnDefinition['type']) || 'text');
-            input.attr("id", column);
-            input.attr("name", column);
-            input.attr("ng-model", instance + "." + column);
-            input.attr("disabled", mode === 'summary');
+            input.attr( "ng-required", (validators && validators['ng-required']) || 'true' );
+            input.attr( "type", (columnDefinition && columnDefinition['type']) || 'text' );
+            input.attr( "id", column );
+            input.attr( "name", column );
+            input.attr( "ng-model", instance + "." + column );
+            input.attr( "df-disable-toggle", "" );
 
             return function (scope, input) {
                 $compile(input)(scope);

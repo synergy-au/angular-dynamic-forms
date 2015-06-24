@@ -1,8 +1,11 @@
 var gulp		= require('gulp'),
+    events      = require('events'),
     del         = require('del'),
     browserSync = require('browser-sync'),
     runs        = require('run-sequence'),
     $           = require('gulp-load-plugins')({lazy: false});
+
+events.EventEmitter.defaultMaxListeners = 100;
 
 gulp.task('clean', function() {
     del(['dist/**/*'], {force: true}, function (err, paths) {
@@ -38,5 +41,6 @@ gulp.task('develop', ['build'], function() {
     });
 
     gulp.watch("css/**/*.css", ['style-watch']);
-    gulp.watch(["js/**/*.js", "js/**/*.html"], ['script-watch']);
+    gulp.watch("js/**/*.js", ['script-watch']);
+    gulp.watch("js/**/*.html", ['script-watch']);
 });

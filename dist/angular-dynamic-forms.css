@@ -1,55 +1,3 @@
-.df-form-group {
-    position:relative;
-    clear: both;
-}
-
-.df-form-input, .df-help {
-    float:left;
-    width:50% !important;
-}
-
-.df-help {
-    visibility:hidden;
-}
-
-.df-validation {
-    clear:left;
-    display: none;
-}
-
-.df-input:active + .messages > .df-help,
-.df-input:focus + .messages > .df-help {
-    visibility:visible;
-}
-
-.df-input.ng-dirty.ng-invalid + .messages > .df-validation{
-    display: block;
-}
-
-.df-input[disabled] {
-    background-color: white;
-    border: none;
-}
-
-/*
-.df-input-label {
-    position:absolute;
-    top: -20px;
-    right: 10px;
-}
-.df-input-label:before {
-    content: "?";
-}
-
-.df-input:active + .messages > .df-input-label,
-.df-input:focus + .messages > .df-input-label {
-    color:blue;
-}
-.df-input:active + .messages > .df-input-label:before,
-.df-input:focus + .messages > .df-input-label:before {
-    content: "x";
-}*/
-
 /*
 Quite simple really.
 A column can run in three modes - write, read and edit.
@@ -58,6 +6,7 @@ Read - label to the side, input
 */
 
 .df-column {
+    position:relative;  /*We can absolute position child elements*/
     padding: 15px;
 }
 
@@ -70,6 +19,15 @@ Read - label to the side, input
 .df-input, .df-label, .df-edit, .df-help, .df-validation {
     box-sizing: border-box;
     float: left;
+}
+
+.df-help {
+    visibility:hidden;
+}
+
+.df-validation {
+    clear:left;
+    display: none;
 }
 
  /*Write mode*/
@@ -107,16 +65,32 @@ Read - label to the side, input
 .df-column-edit .df-edit {
     display: none;
 }
+.df-edit-button {
+    float: right;
+}
+
+.df-column-edit .df-input,
 .df-column-edit .df-help,
 .df-column-edit .df-validation {
     width:35%;
+}
+
+.df-column-edit .df-validation {
+    margin-left:30%;
 }
 
 .df-column-edit .df-edit-controls {
     display:block;
 }
 
+.df-column-write .df-edit-controls,
+.df-column-read .df-edit-controls {
+    display: none;
+}
+
+/* Edit controls */
 .df-edit-controls {
+    clear:both;
     padding-left: 30%;
 }
 
@@ -126,3 +100,40 @@ Read - label to the side, input
 .df-edit-controls .df-save-edit {
     float: right;
 }
+
+
+/*
+    Show the help when the field is active and show the validation when the field is invalid.
+*/
+.df-input:active + .messages > .df-help,
+.df-input:focus + .messages > .df-help {
+    visibility:visible;
+}
+
+.df-input.ng-dirty.ng-invalid + .messages > .df-validation {
+    display: block;
+}
+
+.df-input[disabled] {
+    background-color: white;
+    border: none;
+}
+
+/*
+.df-input-label {
+    position:absolute;
+    top: -20px;
+    right: 10px;
+}
+.df-input-label:before {
+    content: "?";
+}
+
+.df-input:active + .messages > .df-input-label,
+.df-input:focus + .messages > .df-input-label {
+    color:blue;
+}
+.df-input:active + .messages > .df-input-label:before,
+.df-input:focus + .messages > .df-input-label:before {
+    content: "x";
+}*/
