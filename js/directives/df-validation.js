@@ -8,7 +8,7 @@ angular.module('dynamicForms').directive('dfValidation', function($compile, DfSc
             var validation = DfSchemaService.extractValidation(schema, column);
 
             element.removeAttr('df-validation');
-            element.addClass('validation-message');
+            element.addClass('df-validation');
 
             element.append(validation);
         }

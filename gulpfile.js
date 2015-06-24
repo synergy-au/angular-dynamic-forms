@@ -1,6 +1,6 @@
 var gulp		= require('gulp'),
     del         = require('del'),
-    es		    = require('event-stream'),
+    browserSync = require('browser-sync'),
     runs        = require('run-sequence'),
     $           = require('gulp-load-plugins')({lazy: false});
 
@@ -10,32 +10,33 @@ gulp.task('clean', function() {
     });
 });
 
-gulp.task('javascript', function() {
-    var templates = gulp.src('js/**/*.html')
-                    .pipe($.angularTemplatecache({module: 'dynamicForms'}));
+gulp.task('scripts', require('./gulp-tasks/scripts')(gulp, $));
+gulp.task('styles', require('./gulp-tasks/styles')(gulp, $));
 
-    var app = gulp.src('js/**/*.js');
-
-    return es.merge([app, templates])
-        .pipe($.concat('angular-dynamic-forms.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe($.ngAnnotate()).pipe($.uglify({mangle:true}))
-        .pipe($.rename('angular-dynamic-forms.min.js'))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('css', function() {
-    return gulp.src('css/**/*.css')
-        .pipe(gulp.dest('dist'))
-        .pipe($.minifyCss())
-        .pipe($.rename('angular-dynamic-forms.min.css'))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('build', ['css', 'javascript'], function() {
+gulp.task('build', ['styles', 'scripts'], function() {
     console.log("Done")
 });
 
 gulp.task ('default', function() {
     return runs('clean', 'build');
+});
+
+gulp.task('style-watch', ['styles'], browserSync.reload);
+gulp.task('script-watch', ['scripts'], browserSync.reload);
+
+gulp.task('develop', ['build'], function() {
+
+    browserSync.init({
+        server: {
+            baseDir: 'demo',
+            routes: {
+                "/dist": "dist",
+                "/lib": "bower_components"
+            }
+        }
+
+    });
+
+    gulp.watch("css/**/*.css", ['style-watch']);
+    gulp.watch(["js/**/*.js", "js/**/*.html"], ['script-watch']);
 });

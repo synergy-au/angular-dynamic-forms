@@ -3,43 +3,49 @@
     clear: both;
 }
 
-.df-form-input {
+.df-form-input, .df-help {
     float:left;
+    width:50% !important;
 }
 
-.extra-help, .validation-message {
-    visibility: hidden;
-    clear:right;
+.df-help {
+    visibility:hidden;
 }
 
-.df-form-input:active + .messages > .extra-help,
-.df-form-input:focus + .messages > .extra-help {
-    visibility: visible;
+.df-validation {
+    clear:left;
+    display: none;
 }
 
-.df-form-input.ng-dirty.ng-invalid + .messages > .validation-message {
-    visibility: visible;
+.df-input:active + .messages > .df-help,
+.df-input:focus + .messages > .df-help {
+    visibility:visible;
 }
 
-.df-form-input[disabled] {
+.df-input.ng-dirty.ng-invalid + .messages > .df-validation{
+    display: block;
+}
+
+.df-input[disabled] {
     background-color: white;
     border: none;
 }
 
-.df-form-input-label {
+/*
+.df-input-label {
     position:absolute;
-    top: 0px;
-    left:150px;
+    top: -20px;
+    right: 10px;
 }
-.df-form-input-label:before {
+.df-input-label:before {
     content: "?";
 }
 
-.df-form-input:active + .messages > .df-form-input-label,
-.df-form-input:focus + .messages > .df-form-input-label {
+.df-input:active + .messages > .df-input-label,
+.df-input:focus + .messages > .df-input-label {
     color:blue;
 }
-.df-form-input:active + .messages > .df-form-input-label:before,
-.df-form-input:focus + .messages > .df-form-input-label:before {
+.df-input:active + .messages > .df-input-label:before,
+.df-input:focus + .messages > .df-input-label:before {
     content: "x";
-}
+}*/

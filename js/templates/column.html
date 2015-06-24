@@ -1,12 +1,12 @@
-<div df-column="<%= column %>" df-form-group data-layout="<%= layout %>">
-    <label df-label>
+<div df-column="<%= column %>" df-form-group df-mode="<%= mode %>">
+    <label df-label class="df-label">
     </label>
     <div>
-        <input class="df-form-input" df-input />
+        <input class="df-input" df-input />
         <div class="messages">
             <div class="df-form-input-label"></div>
-            <div df-help></div>
-            <div df-validation></div>
+            <div df-help class="df-help"></div>
+            <div df-validation class="df-validation"></div>
         </div>
     </div>
 </div>

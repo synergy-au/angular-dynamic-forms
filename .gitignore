@@ -1,5 +1,4 @@
 .idea
 angular-dynamic-forms.iml
 node_modules
-/index.html
-/bower_components
+bower_components

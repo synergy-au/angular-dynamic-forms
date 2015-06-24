@@ -6,12 +6,12 @@ angular.module('dynamicForms').directive('dfModel', function($compile, $template
             element.removeAttr('df-model');
 
             var columns = DfSchemaService.extractColumns(attrs.dfSchema),
-                mode = attrs.mode;
+                mode = attrs.dfMode;
 
             var template = $templateCache.get('templates/column.html');
 
             _.each(columns, function(it) {
-                element.append( $templateCache.get(it.template) || _.template(template)({column: it.column, layout: mode === 'summary' ? 'form' : 'form'}) );
+                element.append( $templateCache.get(it.template) || _.template(template)({column: it.column, mode: mode}) );
             });
         }
     }

@@ -7,6 +7,7 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
                 column = element.closestAttribute('df-column'),
                 instance = element.closestAttribute('df-model-instance') || 'model',
                 controller = element.closestAttribute('df-controller'),
+                mode = element.closestAttribute( 'df-mode' ) || 'write',
                 model = element.closestAttribute('df-model-instance');
 
             var validators = DfSchemaService.extractValidators(schema, column),
@@ -14,8 +15,8 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 
             element.removeAttr('df-input');
             var input;
-            if (columnDefinition['type'] == 'select') {
-                input = angular.element('<select class="df-form-input"></select>');
+            if ((columnDefinition && columnDefinition['type']) == 'select') {
+                input = angular.element('<select class="df-input"></select>');
                 element.replaceWith(input)
             } else {
                 input = element;
@@ -25,11 +26,12 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
                 input.attr(key, _.template(val)({controller: controller, model: model}));
             });
 
-            input.attr( 'ng-required', validators['ng-required'] || 'true');
-            input.attr( 'type', columnDefinition['type'] || 'text');
+            input.attr( 'ng-required', (validators && validators['ng-required']) || 'true');
+            input.attr( 'type', (columnDefinition && columnDefinition['type']) || 'text');
             input.attr("id", column);
             input.attr("name", column);
             input.attr("ng-model", instance + "." + column);
+            input.attr("disabled", mode === 'summary');
 
             return function (scope, input) {
                 $compile(input)(scope);

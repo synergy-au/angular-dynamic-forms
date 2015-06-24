@@ -8,7 +8,7 @@ angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaSe
             var help = DfSchemaService.extractHelp(schema, column);
 
             element.removeAttr('df-help');
-            element.addClass('extra-help');
+            element.addClass('df-help');
 
             element.append(help);
         }
