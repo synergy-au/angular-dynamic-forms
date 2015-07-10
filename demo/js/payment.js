@@ -1,6 +1,14 @@
 angular.module('payment', ['dynamicForms'])
     .controller('PayController', function() {
-        this.model = {};
+        this.model = {
+            paymentNumber: '1234567890',
+            amount: '10.25',
+            cardHolderName: 'Brian Foody',
+            cardNumber: '1234123412341234',
+            cvv: '123',
+            expiryMonth: 12,
+            expiryYear: 15
+        };
     })
     .factory('PaymentModel', function() {
         var schema = [
@@ -37,13 +45,9 @@ angular.module('payment', ['dynamicForms'])
                 validation: "<p>Please enter a valid credit or debit card number.</p>",
                 help: "This is the number on your card."
             },
-            /*{
-             column: 'expiration',
-             template: 'dynamic-forms/templates/expiryDate.html'
-             },*/
             {
                 column: 'expiryMonth',
-                type: "select",
+                type: "text",
                 label: 'Expiry month',
                 validators: {},
                 validation: "<p>Please enter an expiry month.</p>",
@@ -51,7 +55,7 @@ angular.module('payment', ['dynamicForms'])
             },
             {
                 column: 'expiryYear',
-                type: "select",
+                type: "text",
                 label: 'Expiry year',
                 validators: {},
                 validation: "<p>Please enter an expiry year.</p>",

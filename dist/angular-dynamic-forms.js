@@ -19,12 +19,10 @@ angular.module('dynamicForms').directive('dfModel', function($compile, $template
         restrict: 'EA',
         priority: 1100,
         compile: function(element, attrs) {
-            element.removeAttr('df-model');
-
             var columns = DfSchemaService.extractColumns(attrs.dfSchema),
                 mode = attrs.dfMode;
 
-            var template = $templateCache.get('templates/column.html');
+            var template = $templateCache.get('templates/' + (attrs.dfTemplate || 'default') + '.html');
 
             _.each(columns, function(it) {
                 element.append( $templateCache.get(it.template) || _.template(template)({column: it.column, mode: mode}) );
@@ -32,11 +30,33 @@ angular.module('dynamicForms').directive('dfModel', function($compile, $template
         }
     }
 });
-angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/column.html","<div df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input class=\"df-input\" df-input />\r\n        <div class=\"messages\">\r\n            <div class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"df-edit-controls\"></div>\r\n\r\n</div>");
-$templateCache.put("templates/edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
-$templateCache.put("templates/edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.readonly()\">\r\n    Edit\r\n</button>");}]);
 // TODO Contain all logic in here.
-angular.module('dynamicForms').service('DfSchemaService', function ($injector) {
+angular.module('dynamicForms').service('DfSchemaService', function (Utils, $injector) {
+    var defaults =  $injector.has('dynamicFormDefaults')  ? $injector.get('dynamicFormDefaults') : function(column) {
+        return {
+            "ng-required": true,
+            "type": "text",
+            "df-edit-button": "",
+            "id": column,
+            "name": column
+        };
+    };
+
+    this.findSchema = function(element) {
+        return Utils.getDependency(element.closestAttribute('df-schema'));
+    };
+    this.findColumn = function(element) {
+        return element.closestAttribute('df-column');
+    };
+
+    this.extractValue = function(element, key) {
+        var schema = this.findSchema(element);
+        return _(schema)
+            .where({column: this.findColumn(element)})    // pluck value
+            .pluck(key)
+            .value().pop();
+    };
+
     this.extractColumns = function(schema) {
         this.schema = $injector.get(schema);
         return _.map(this.schema, function(it){
@@ -51,26 +71,25 @@ angular.module('dynamicForms').service('DfSchemaService', function ($injector) {
 
     this.extractValidators = function(schema, column) {
         this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('validators').value().pop();
+
+        return _.chain(this.schema)
+                    .where({column: column})
+                    .pluck('validators')
+                    .map(function(validators){
+                        return _.defaults(validators || {}, defaults());
+                    }).value().pop();
     };
 
-    this.extractValidation = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('validation').value().pop();
+    this.prependColumnValue = function(element, key) {
+        var value = this.extractValue(element, key);
+        element.prepend(value);
     };
-
-    this.extractLabel = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('label').value().pop();
-    };
-
-    this.extractHelp = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.chain(this.schema).where({column: column}).pluck('help').value().pop();
+    this.appendColumnValue = function(element, key) {
+        var value = this.extractValue(element, key);
+        element.append(value);
     };
 });
-// TODO Contain all logic in here.
-angular.module('dynamicForms').service('Utils', function () {
+angular.module('dynamicForms').service('Utils', function ($injector) {
     var classes = {
         forMode: {
             write: 'df-column-write',
@@ -79,22 +98,29 @@ angular.module('dynamicForms').service('Utils', function () {
         }
     };
 
-    this.classFor = function (mode) {
-        return classes.forMode[mode];
+    this.classForState = function (state) {
+        return classes.forMode[state];
     };
 
-    this.classesFor = function (stateFrom, stateTo) {
-        return _([stateFrom, stateTo]).map(function(state) {
+    this.classesForStates = function (states) {
+        return _(states).map(function(state) {
             return classes.forMode[state];
         }).unique().value().join(' ');
     };
+
+    this.getDependency = function(dependencyName) {
+        return dependencyName ? $injector.get(dependencyName) : undefined;
+    }
 });
+angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
+$templateCache.put("templates/npw.html","<div class=\"field-group\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input>\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" toggle-tooltip=\"\" class=\"form-tooltip-toggle\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
+$templateCache.put("directives/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
+$templateCache.put("directives/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.readonly()\">\r\n    Edit\r\n</button>");}]);
 angular.module('dynamicForms').directive('dfColumn', function() {
     return {
         restrict: 'A',
         scope: true,
         link: function(scope, element, attrs, ctrl) {
-            element.addClass("df-column");
             ctrl.init(element.closestAttribute( 'df-mode' ) || 'write');
         },
         controller: 'DfColumnController',
@@ -103,37 +129,30 @@ angular.module('dynamicForms').directive('dfColumn', function() {
 });
 angular.module('dynamicForms').directive('dfEditControls', function() {
     return {
-        restrict: 'C',
+        restrict: 'A',
         require: '^dfColumn',
-        templateUrl: 'templates/edit-controls.html'
+        templateUrl: 'directives/components/df-edit-controls.html'
     }
 });
 angular.module('dynamicForms').directive('dfEdit', function() {
     return {
-        restrict: 'C',
+        restrict: 'A',
         require: '^dfColumn',
-        templateUrl: 'templates/edit.html'
+        templateUrl: 'directives/components/df-edit.html'
     }
 });
 angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaService) {
     return {
-        restrict: 'EA',
+        restrict: 'A',
         priority: 1050,
         compile: function(element, attrs) {
-            var schema = element.closestAttribute('df-schema'),
-                column = element.closestAttribute('df-column');
-            var help = DfSchemaService.extractHelp(schema, column);
-
-            element.removeAttr('df-help');
-            element.addClass('df-help');
-
-            element.append(help);
+            DfSchemaService.appendColumnValue(element, 'help');
         }
     }
 });
 angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaService) {
     return {
-        restrict: 'EA',
+        restrict: 'A',
         priority: 1050,
         compile: function(element, attrs) {
             var schema = element.closestAttribute('df-schema'),
@@ -147,6 +166,7 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
                 columnDefinition = DfSchemaService.extractColumn(schema, column);
 
             element.removeAttr('df-input');
+
             var input;
             if ((columnDefinition && columnDefinition['type']) === 'select') {
                 input = angular.element('<select class="df-input"></select>');
@@ -159,12 +179,7 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
                 input.attr(key, _.template(val)({controller: controller, model: model}));
             });
 
-            input.attr( "ng-required", (validators && validators['ng-required']) || 'true' );
-            input.attr( "type", (columnDefinition && columnDefinition['type']) || 'text' );
-            input.attr( "id", column );
-            input.attr( "name", column );
             input.attr( "ng-model", instance + "." + column );
-            input.attr( "df-disable-toggle", "" );
 
             return function (scope, input) {
                 $compile(input)(scope);
@@ -174,36 +189,28 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 });
 angular.module('dynamicForms').directive('dfLabel', function($compile, DfSchemaService) {
     return {
-        restrict: 'EA',
+        restrict: 'A',
         priority: 1075,
-        compile: function(element, attrs) {
-            var schema = element.closestAttribute('df-schema'),
-                column = element.closestAttribute('df-column');
-            var label = DfSchemaService.extractLabel(schema, column);
-
-            element.removeAttr('df-label');
-            element.attr('for', column);
-
-            element.prepend(label);
+        compile: function(element) {
+            DfSchemaService.prependColumnValue(element, 'label');
+            var column = DfSchemaService.findColumn(element);
+            element.attr('for', column)
         }
     }
 });
 angular.module('dynamicForms').directive('dfValidation', function($compile, DfSchemaService) {
     return {
-        restrict: 'EA',
+        restrict: 'A',
         priority: 1025,
         compile: function(element, attrs) {
-            var schema = element.closestAttribute('df-schema'),
-                column = element.closestAttribute('df-column');
-            var validation = DfSchemaService.extractValidation(schema, column);
-
-            element.removeAttr('df-validation');
-            element.addClass('df-validation');
-
-            element.append(validation);
+            DfSchemaService.appendColumnValue(element, 'validation');
         }
     }
 });
+/**
+ * This controller manages the column's (input field) state.
+ * Specifically between the read and edit states.
+ */
 angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', 'Utils', function ($scope, $element, Utils) {
     var currentMode, input, savedValue;
 
@@ -216,7 +223,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     this.registerInput = function(inputElem) {
         input = inputElem;
-        toggleInput(currentMode);
+        toggleInputMode(currentMode);
     };
 
     this.startEdit  = function () {
@@ -231,7 +238,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
     };
 
     this.saveEdit  = function () {
-        if (!input.val()) {
+        if (!input.controller('ngModel').$valid) {
             return;
         }
         setMode('read');
@@ -243,23 +250,23 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     var setMode = function(mode) {
         $element.toggleClass(
-            Utils.classesFor(currentMode, mode)
+            Utils.classesForStates([currentMode, mode])
         );
-        toggleInput(mode);
+        toggleInputMode(mode);
         currentMode = mode;
     };
 
-    var toggleInput = function (mode) {
+    var toggleInputMode = function (mode) {
         if (input) {
             input.attr('disabled', mode === 'read');
         }
     };
 }]);
-angular.module('dynamicForms').directive('dfDisableToggle', function() {
+angular.module('dynamicForms').directive('dfEditButton', function() {
     return {
         restrict: 'A',
         require: '^dfColumn',
-        templateUrl: 'templates/edit.html',
+        templateUrl: 'directives/components/df-edit.html',
         link: function(scope, element, attrs, columnCtrl) {
             columnCtrl.registerInput(element);
         }

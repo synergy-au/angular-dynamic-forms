@@ -3,7 +3,6 @@ angular.module('dynamicForms').directive('dfColumn', function() {
         restrict: 'A',
         scope: true,
         link: function(scope, element, attrs, ctrl) {
-            element.addClass("df-column");
             ctrl.init(element.closestAttribute( 'df-mode' ) || 'write');
         },
         controller: 'DfColumnController',

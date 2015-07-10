@@ -1,7 +1,7 @@
 angular.module('dynamicForms').directive('dfEdit', function() {
     return {
-        restrict: 'C',
+        restrict: 'A',
         require: '^dfColumn',
-        templateUrl: 'templates/edit.html'
+        templateUrl: 'directives/components/df-edit.html'
     }
 });

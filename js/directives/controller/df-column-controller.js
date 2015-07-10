@@ -1,3 +1,7 @@
+/**
+ * This controller manages the column's (input field) state.
+ * Specifically between the read and edit states.
+ */
 angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', 'Utils', function ($scope, $element, Utils) {
     var currentMode, input, savedValue;
 
@@ -10,7 +14,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     this.registerInput = function(inputElem) {
         input = inputElem;
-        toggleInput(currentMode);
+        toggleInputMode(currentMode);
     };
 
     this.startEdit  = function () {
@@ -25,7 +29,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
     };
 
     this.saveEdit  = function () {
-        if (!input.val()) {
+        if (!input.controller('ngModel').$valid) {
             return;
         }
         setMode('read');
@@ -37,13 +41,13 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     var setMode = function(mode) {
         $element.toggleClass(
-            Utils.classesFor(currentMode, mode)
+            Utils.classesForStates([currentMode, mode])
         );
-        toggleInput(mode);
+        toggleInputMode(mode);
         currentMode = mode;
     };
 
-    var toggleInput = function (mode) {
+    var toggleInputMode = function (mode) {
         if (input) {
             input.attr('disabled', mode === 'read');
         }
