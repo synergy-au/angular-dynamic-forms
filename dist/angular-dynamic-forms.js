@@ -15,7 +15,7 @@ angular.element.prototype.closestAttribute = function (attr) {
     }
 };
 // TODO Contain all logic in here.
-angular.module('dynamicForms').service('DfSchemaService', function (Utils, $injector) {
+angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $injector) {
     var defaults =  $injector.has('dynamicFormDefaults')  ? $injector.get('dynamicFormDefaults') : function(column) {
         return {
             "ng-focus": "columnCtrl.onInputFocus()",
@@ -27,7 +27,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (Utils, $inje
     };
 
     this.findSchema = function(element) {
-        return Utils.getDependency(element.closestAttribute('df-schema'));
+        return DfUtils.getDependency(element.closestAttribute('df-schema'));
     };
     this.findColumn = function(element) {
         return element.closestAttribute('df-column');
@@ -73,7 +73,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (Utils, $inje
         element.append(value);
     };
 });
-angular.module('dynamicForms').service('Utils', function ($injector) {
+angular.module('dynamicForms').service('DfUtils', function ($injector) {
     var classes = {
         forMode: {
             write: 'df-column-write',
@@ -96,6 +96,10 @@ angular.module('dynamicForms').service('Utils', function ($injector) {
         return dependencyName ? $injector.get(dependencyName) : undefined;
     }
 });
+angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
+$templateCache.put("templates/npw.html","<div class=\"field-group\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column %>.$invalid}\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input>\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
+$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
+$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 angular.module('dynamicForms').directive('dfModel', function($templateCache, DfSchemaService) {
     return {
         restrict: 'EA',
@@ -116,15 +120,11 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfS
         }
     }
 });
-angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
-$templateCache.put("templates/npw.html","<div class=\"field-group\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column %>.$invalid}\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input>\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
-$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
-$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 /**
  * This controller manages the column's (input field) state.
  * Specifically between the read and edit states.
  */
-angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', 'Utils', function ($scope, $element, Utils) {
+angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', 'DfUtils', function ($scope, $element, DfUtils) {
     var model = {
         currentMode: $element.closestAttribute( 'df-mode' ) || 'write',
         element: $element,
@@ -174,7 +174,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     var setMode = function(mode) {
         model.element.toggleClass(
-            Utils.classesForStates([model.currentMode, mode])
+            DfUtils.classesForStates([model.currentMode, mode])
         );
         toggleInputMode(mode);
         model.currentMode = mode;
