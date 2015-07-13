@@ -1,4 +1,4 @@
-angular.module('dynamicForms').service('Utils', function ($injector) {
+angular.module('dynamicForms').service('DfUtils', function ($injector) {
     var classes = {
         forMode: {
             write: 'df-column-write',
