@@ -2,9 +2,9 @@
 angular.module('dynamicForms').service('DfSchemaService', function (Utils, $injector) {
     var defaults =  $injector.has('dynamicFormDefaults')  ? $injector.get('dynamicFormDefaults') : function(column) {
         return {
+            "ng-focus": "columnCtrl.onInputFocus()",
             "ng-required": true,
             "type": "text",
-            "df-edit-button": "",
             "id": column,
             "name": column
         };
@@ -26,25 +26,25 @@ angular.module('dynamicForms').service('DfSchemaService', function (Utils, $inje
     };
 
     this.extractColumns = function(schema) {
-        this.schema = $injector.get(schema);
-        return _.map(this.schema, function(it){
+        var schema = $injector.get(schema);
+        return _.map(schema, function(it){
             return { column: it.column, template: it.template };
         });
     };
 
     this.extractColumn = function(schema, column) {
-        this.schema = $injector.get(schema);
-        return _.find(this.schema, {column: column});
+        var schema = $injector.get(schema);
+        return _.find(schema, {column: column});
     };
 
     this.extractValidators = function(schema, column) {
-        this.schema = $injector.get(schema);
+        var schema = $injector.get(schema);
 
-        return _.chain(this.schema)
+        return _.chain(schema)
                     .where({column: column})
                     .pluck('validators')
                     .map(function(validators){
-                        return _.defaults(validators || {}, defaults());
+                        return _.defaults(validators || {}, defaults(column));
                     }).value().pop();
     };
 

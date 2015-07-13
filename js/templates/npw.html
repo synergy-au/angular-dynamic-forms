@@ -1,4 +1,5 @@
-<div class="field-group" df-column="<%= column %>" df-mode="<%= mode %>">
+<div class="field-group" df-column="<%= column %>" df-mode="<%= mode %>"
+     ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column %>.$invalid}">
 
     <div class="form-input-container">
         <label class="form-label" df-label></label>
@@ -6,13 +7,14 @@
     </div>
 
 
-    <button type="button" toggle-tooltip="" class="form-tooltip-toggle">
+    <button type="button" class="form-tooltip-toggle" ng-click="columnCtrl.toggleHelp()">
         <span>Show help information</span>
     </button>
 
     <!--Help-->
     <div class="form-tooltip form-tooltip--feature-aside" df-help>
     </div>
+
     <!--Validation-->
     <div class="form-error" df-validation>
     </div>

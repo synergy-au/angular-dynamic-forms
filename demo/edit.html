@@ -1,0 +1,18 @@
+<form class="ng-pristine ng-valid" method="post">
+    <fieldset tooltip-group="" class="form-section ng-scope">
+        <div>
+
+            <div ng-form ng-controller="PayController as payCtrl">
+
+                <div ng-form="paymentForm"
+                     df-model
+                     df-schema="PaymentModel"
+                     df-controller="payCtrl"
+                     df-model-instance="payCtrl.readModel"
+                     df-mode="read"></div>
+
+            </div>
+
+        </div>
+    </fieldset>
+</form>

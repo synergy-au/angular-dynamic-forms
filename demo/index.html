@@ -1,36 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Forms</title>
-    <link rel="shortcut icon" href="img/favicon.ico" />
+    <head>
 
-    <link rel="stylesheet" href="/lib/angular/angular-csp.css"/>
-    <link rel="stylesheet" href="/lib/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="/dist/angular-dynamic-forms.css"/>
+        <title>Pay my bill - Synergy</title>
 
-</head>
-<body>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 
-    <div ng-app="payment" style="width: 550px">
+        <link rel="shortcut icon" href="img/favicon.ico"/>
+        <link rel="shortcut icon" href="img/favicon.ico"/>
 
-        <form method="post" ng-controller="PayController as payCtrl">
+        <link rel="stylesheet" href="/lib/angular/angular-csp.css"/>
+        <link rel="stylesheet" href="/dist/angular-dynamic-forms.css"/>
 
-            <div ng-form="paymentForm"
-                 df-model
-                 df-schema="PaymentModel"
-                 df-controller="payCtrl"
-                 df-model-instance="payCtrl.model"
-                 df-mode="read"></div>
+    </head>
+    <body ng-app="payment">
 
-        </form>
+        <a href="#page-content" class="skip-to-content">Skip to main content</a>
 
-    </div>
+        <div id="site-wrap">
+            <header id="site-header" itemscope="" itemtype="http://schema.org/WPHeader">
+                <a id="site-logo" href="/" itemscope="" itemtype="http://schema.org/Organization" itemprop="url">
+                    <h1 itemprop="name">Synergy</h1>
+                    <meta itemprop="logo" content="/images/synergy-logo.svg">
+                    <meta itemprop="telephone" content="131353">
+                </a>
+            </header>
 
-    <script type="text/javascript" src="/lib/angular/angular.js"></script>
-    <script type="text/javascript" src="/lib/lodash-compat/lodash.js"></script>
-    <script type="text/javascript" src="/dist/angular-dynamic-forms.js"></script>
+            <header class="form-hero">
+                <div class="inner-wrap">
+                    <h1 class="form-hero-title">Pay my bill</h1>
 
-    <script type="text/javascript" src="js/payment.js"></script>
+                    <p class="form-hero-subtitle">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.</p>
 
-</body>
+                    <div class="form-hero-description">
+                        <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.</p><a href="#" class="form-hero-read-more">xxx</a>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="progress-bar">
+                <ul class="navigation-list">
+                    <li class="navigation-item progress-bar-item icon icon--paperstack navigation-item--current">
+                        <a href="#" class="progress-bar-link">
+                            <span class="progress-bar-title">Your bill</span>
+                        </a>
+                    </li>
+                    <li class="navigation-item progress-bar-item icon icon--inspect ">
+                        <a href="#" class="progress-bar-link">
+                            <span class="progress-bar-title">Review &amp; confirm</span>
+                        </a>
+                    </li>
+                    <li class="navigation-item progress-bar-item icon icon--tick-circle ">
+                        <a href="#" class="progress-bar-link">
+                            <span class="progress-bar-title">You’re done</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="page-content">
+            <div class="inner-wrap">
+                <div ng-include="'write.html'"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="/lib/lodash-compat/lodash.js"></script>
+        <script type="text/javascript" src="/dist/angular-dynamic-forms.js"></script>
+
+        <script type="text/javascript" src="js/payment.js"></script>
+
+    </body>
 </html>

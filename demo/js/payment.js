@@ -47,7 +47,6 @@ angular.module('payment', ['dynamicForms'])
             },
             {
                 column: 'expiryMonth',
-                type: "text",
                 label: 'Expiry month',
                 validators: {},
                 validation: "<p>Please enter an expiry month.</p>",
@@ -55,7 +54,6 @@ angular.module('payment', ['dynamicForms'])
             },
             {
                 column: 'expiryYear',
-                type: "text",
                 label: 'Expiry year',
                 validators: {},
                 validation: "<p>Please enter an expiry year.</p>",
@@ -68,7 +66,7 @@ angular.module('payment', ['dynamicForms'])
                     "ng-minlength": 3,
                     "ng-maxlength": 4
                 },
-                validation: "<p>Your CVV is the last {{cardType === 'amex' ? 4 : 3}} digits of the number on the reverse side of your card.</p>",
+                validation: "<p>Your CVV is the last digits of the number on the reverse side of your card.</p>",
                 help: "This is the {{cardType === 'amex' ? 4 : 3}}  digits on the back of your card."
             }
         ];
