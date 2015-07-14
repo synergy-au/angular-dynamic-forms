@@ -1,13 +1,7 @@
 angular.module('payment', ['dynamicForms'])
     .controller('PayController', function() {
         this.model = {
-            paymentNumber: '1234567890',
-            amount: '10.25',
-            cardHolderName: 'Brian Foody',
-            cardNumber: '1234123412341234',
-            cvv: '123',
-            expiryMonth: 12,
-            expiryYear: 15
+
         };
     })
     .factory('PaymentModel', function() {
