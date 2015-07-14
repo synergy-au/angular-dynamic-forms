@@ -30,7 +30,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         return DfUtils.getDependency(element.closestAttribute('df-schema'));
     };
     this.findColumn = function(element) {
-        return element.closestAttribute('df-column');
+        return element.attr('df-column') || element.closestAttribute('df-column');
     };
 
     this.extractValue = function(element, key) {
@@ -44,7 +44,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
     this.extractColumns = function(schema) {
         var schema = $injector.get(schema);
         return _.map(schema, function(it){
-            return { column: it.column, template: it.template };
+            return { column: it.column, template: it.template, show: it.show };
         });
     };
 
@@ -96,27 +96,31 @@ angular.module('dynamicForms').service('DfUtils', function ($injector) {
         return dependencyName ? $injector.get(dependencyName) : undefined;
     }
 });
-angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
-$templateCache.put("templates/npw.html","<div class=\"field-group\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column %>.$invalid && <%= form %>.<%= column %>.$dirty}\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input>\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
-$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
-$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 angular.module('dynamicForms').directive('dfModel', function($templateCache, DfSchemaService) {
     return {
         restrict: 'EA',
         priority: 1100,
         compile: function(tElement, tAttrs) {
             var columns = DfSchemaService.extractColumns(tAttrs.dfSchema),
+                controller = tAttrs.dfController,
+                model = tAttrs.dfModelInstance,
                 mode = tAttrs.dfMode,
                 form = tAttrs.ngForm;
 
             var template = $templateCache.get('templates/' + (tAttrs.dfTemplate || 'default') + '.html');
 
             _.each(columns, function(it) {
-                tElement.append( $templateCache.get(it.template) || _.template(template)({form: form, column: it.column, mode: mode}) );
+                var show = it.show ? _.template(it.show)({controller: controller, model: model}) : true;
+
+                tElement.append( $templateCache.get(it.template) || _.template(template)({form: form, show: show, column: it.column, mode: mode}) );
             });
         }
     }
 });
+angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
+$templateCache.put("templates/npw.html","<div class=\"field-group\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column %>.$invalid && <%= form %>.<%= column %>.$dirty}\"\r\n     ng-show=\"<%= show %>\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input>\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
+$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
+$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 /**
  * This controller manages the column's (input field) state.
  * Specifically between the read and edit states.
@@ -228,6 +232,13 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
         return element;
     }
 
+    function makeOptionalIfNeeded(validators, columnDefinition, controller, model) {
+        if (columnDefinition.show) {
+            var optionalExpression = _.template(columnDefinition.show)({controller: controller, model: model});
+            validators["ng-required"] = "(" + optionalExpression + ") " + " && (" +  validators["ng-required"] + ")";
+        }
+    }
+
     return {
         restrict: 'A',
         priority: 1050,
@@ -239,10 +250,9 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
             // Retrieve details
             var schema = element.closestAttribute('df-schema'),
                 column = element.closestAttribute('df-column'),
-                instance = element.closestAttribute('df-model-instance') || 'model',
+                model = element.closestAttribute('df-model-instance') || 'model',
                 controller = element.closestAttribute('df-controller'),
-                mode = element.closestAttribute( 'df-mode' ) || 'write',
-                model = element.closestAttribute('df-model-instance');
+                mode = element.closestAttribute( 'df-mode' ) || 'write';
 
             // Check if we need to swap in a select
             var columnDefinition = DfSchemaService.extractColumn(schema, column);
@@ -250,12 +260,14 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 
             // Attach validators using defaults where needed.
             var validators = DfSchemaService.extractValidators(schema, column);
+            makeOptionalIfNeeded(validators, columnDefinition, controller, model);
+
             _.each(validators, function(val,key) {
                 input.attr(key, _.template(val)({controller: controller, model: model}));
             });
 
             // Bind to the model.
-            input.attr( "ng-model", instance + "." + column );
+            input.attr( "ng-model", model + "." + column );
 
             return {
                 pre: function(scope, iElem){

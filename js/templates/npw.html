@@ -1,5 +1,6 @@
 <div class="field-group" df-column="<%= column %>" df-mode="<%= mode %>"
-     ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column %>.$invalid && <%= form %>.<%= column %>.$dirty}">
+     ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column %>.$invalid && <%= form %>.<%= column %>.$dirty}"
+     ng-show="<%= show %>">
 
     <div class="form-input-container">
         <label class="form-label" df-label></label>

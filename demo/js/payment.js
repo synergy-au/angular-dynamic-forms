@@ -1,12 +1,19 @@
 angular.module('payment', ['dynamicForms'])
     .controller('PayController', function() {
         this.model = {
-
+            paymentNumber: '1234567890',
+            amount: '10.25',
+            cardHolderName: 'Brian Foody',
+            cardNumber: '1234123412341234',
+            cvv: '123',
+            expiryMonth: 12,
+            expiryYear: 15
         };
     })
     .factory('PaymentModel', function() {
         var schema = [
             {
+                show: '!<%= controller %>.existingAccount',
                 column: 'paymentNumber',
                 label: 'Payment number',
                 validation: "<p>The payment number provided is invalid. It's the 10 digit number at the bottom of your bill.",

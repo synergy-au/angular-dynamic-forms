@@ -10,6 +10,13 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
         return element;
     }
 
+    function makeOptionalIfNeeded(validators, columnDefinition, controller, model) {
+        if (columnDefinition.show) {
+            var optionalExpression = _.template(columnDefinition.show)({controller: controller, model: model});
+            validators["ng-required"] = "(" + optionalExpression + ") " + " && (" +  validators["ng-required"] + ")";
+        }
+    }
+
     return {
         restrict: 'A',
         priority: 1050,
@@ -21,10 +28,9 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
             // Retrieve details
             var schema = element.closestAttribute('df-schema'),
                 column = element.closestAttribute('df-column'),
-                instance = element.closestAttribute('df-model-instance') || 'model',
+                model = element.closestAttribute('df-model-instance') || 'model',
                 controller = element.closestAttribute('df-controller'),
-                mode = element.closestAttribute( 'df-mode' ) || 'write',
-                model = element.closestAttribute('df-model-instance');
+                mode = element.closestAttribute( 'df-mode' ) || 'write';
 
             // Check if we need to swap in a select
             var columnDefinition = DfSchemaService.extractColumn(schema, column);
@@ -32,12 +38,14 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 
             // Attach validators using defaults where needed.
             var validators = DfSchemaService.extractValidators(schema, column);
+            makeOptionalIfNeeded(validators, columnDefinition, controller, model);
+
             _.each(validators, function(val,key) {
                 input.attr(key, _.template(val)({controller: controller, model: model}));
             });
 
             // Bind to the model.
-            input.attr( "ng-model", instance + "." + column );
+            input.attr( "ng-model", model + "." + column );
 
             return {
                 pre: function(scope, iElem){

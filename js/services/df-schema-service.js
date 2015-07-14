@@ -14,7 +14,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         return DfUtils.getDependency(element.closestAttribute('df-schema'));
     };
     this.findColumn = function(element) {
-        return element.closestAttribute('df-column');
+        return element.attr('df-column') || element.closestAttribute('df-column');
     };
 
     this.extractValue = function(element, key) {
@@ -28,7 +28,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
     this.extractColumns = function(schema) {
         var schema = $injector.get(schema);
         return _.map(schema, function(it){
-            return { column: it.column, template: it.template };
+            return { column: it.column, template: it.template, show: it.show };
         });
     };
 
