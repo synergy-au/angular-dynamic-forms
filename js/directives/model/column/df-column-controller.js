@@ -2,7 +2,7 @@
  * This controller manages the column's (input field) state.
  * Specifically between the read and edit states.
  */
-angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', 'DfUtils', function ($scope, $element, DfUtils) {
+angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$element', '$rootScope', 'DfUtils', function ($scope, $element, $rootScope, DfUtils) {
     var model = {
         currentMode: $element.closestAttribute( 'df-mode' ) || 'write',
         element: $element,
@@ -35,6 +35,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
     };
 
     this.onInputFocus = function() {
+        $rootScope.$broadcast('df_input_focus', model.input.attr('id'));
         model.help = true;
     };
 
@@ -61,4 +62,8 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
     var toggleInputMode = function (mode) {
         model.input.attr('disabled', mode === 'read');
     };
+
+    $rootScope.$on('df_input_focus', function(val) {
+        model.help = val === model.input.attr('id');
+    });
 }]);

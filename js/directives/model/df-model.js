@@ -12,9 +12,6 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfS
             _.each(columns, function(it) {
                 tElement.append( $templateCache.get(it.template) || _.template(template)({form: form, column: it.column, mode: mode}) );
             });
-        },
-        controller: function ($scope, $element, $attrs) {
-
         }
     }
 });
