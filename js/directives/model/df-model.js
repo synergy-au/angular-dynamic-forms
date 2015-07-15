@@ -23,7 +23,7 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
                 form = tAttrs.ngForm;
 
             _.each(schema, function(column) {
-                var props = {controller: controller, column: column, form: form, mode: mode};
+                var props = {controller: controller, column: column, form: form, mode: mode, model: model};
 
                 var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
 
