@@ -1,8 +1,9 @@
 angular.module('dynamicForms').directive('dfValidation', function($compile, DfSchemaService) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            DfSchemaService.appendColumnValue(element, 'validation');
+        priority: 1000,
+        compile: function(tElement, tAttrs) {
+            DfSchemaService.appendColumnValue(tElement, 'validation');
         }
     }
 });

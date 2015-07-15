@@ -280,18 +280,20 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
 angular.module('dynamicForms').directive('dfLabel', function($compile, DfSchemaService) {
     return {
         restrict: 'A',
-        link: function(scope, element) {
-            DfSchemaService.prependColumnValue(element, 'label');
-            var column = DfSchemaService.findColumn(element);
-            element.attr('for', column)
+        priority: 1000,
+        compile: function(tElement) {
+            DfSchemaService.prependColumnValue(tElement, 'label');
+            var column = DfSchemaService.findColumn(tElement);
+            tElement.attr('for', column)
         }
     }
 });
 angular.module('dynamicForms').directive('dfValidation', function($compile, DfSchemaService) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            DfSchemaService.appendColumnValue(element, 'validation');
+        priority: 1000,
+        compile: function(tElement, tAttrs) {
+            DfSchemaService.appendColumnValue(tElement, 'validation');
         }
     }
 });
