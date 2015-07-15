@@ -62,6 +62,12 @@ angular.module('payment', ['dynamicForms'])
                 },
                 validation: "<p>Your CVV is the last digits of the number on the reverse side of your card.</p>",
                 help: "This is the {{<%= model %>.cvv === '999' ? 4 : 3}}  digits on the back of your card."
+            },
+            {
+                name: 'termsAccepted',
+                show: "'<%= mode %>' === 'read'",
+                type: 'checkbox',
+                label: 'I understand that use of this service constitutes acceptance of terms & conditions.'
             }
         ];
 

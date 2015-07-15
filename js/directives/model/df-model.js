@@ -5,6 +5,8 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
                 return '/radio.html';
             case 'inputgroup':
                 return '/inputgroup.html';
+            case 'checkbox':
+                return '/checkbox.html';
             default:
                 return '/input.html';
         }
@@ -23,7 +25,7 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
             _.each(schema, function(column) {
                 var template = $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
 
-                var show = column.show ? _.template(column.show)({controller: controller, model: model}) : true;
+                var show = column.show ? _.template(column.show)({controller: controller, model: model, column: column, mode: mode}) : true;
 
                 tElement.append( $templateCache.get(column.template) || _.template(template)({column: column, form: form, show: show, mode: mode}) );
             });

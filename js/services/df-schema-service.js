@@ -4,9 +4,9 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         return {
             "ng-focus": "columnCtrl.onInputFocus()",
             "ng-required": true,
-            "type": "text",
-            "id": column,
-            "name": column
+            "type": column.type || "text",
+            "id": column.name,
+            "name": column.name
         };
     };
 
@@ -30,11 +30,12 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         return _.find(schema, {name: column});
     };
 
-    this.extractValidators = function(schema, column) {
-        var schema = $injector.get(schema);
+    this.extractValidators = function(schemaName, columnName) {
+        var schema = $injector.get(schemaName);
+        var column = this.extractColumn(schemaName, columnName);
 
         return _.chain(schema)
-                    .where({name: column})
+                    .where({name: columnName})
                     .pluck('validators')
                     .map(function(validators){
                         return _.defaults(validators || {}, defaults(column));
