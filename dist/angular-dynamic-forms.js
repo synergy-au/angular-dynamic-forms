@@ -117,11 +117,13 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
                 form = tAttrs.ngForm;
 
             _.each(schema, function(column) {
-                var template = $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
+                var props = {controller: controller, column: column, form: form, mode: mode};
 
-                var show = column.show ? _.template(column.show)({controller: controller, model: model, column: column, mode: mode}) : true;
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
 
-                tElement.append( $templateCache.get(column.template) || _.template(template)({column: column, form: form, show: show, mode: mode}) );
+                props.show = column.show ? _.template(column.show)(props) : true;
+
+                tElement.append( _.template(template)(props) );
             });
         }
     }
@@ -210,13 +212,6 @@ angular.module('dynamicForms').directive('dfEditControls', function() {
         templateUrl: 'directives/model/column/components/`df-edit-controls.html`'
     }
 });
-angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/default/input.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
-$templateCache.put("templates/myaccount/input.html","<div sy-form-group data-layout=\"form\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <label class=\"control-label\" df-label ng-class=\"{\'label-required\': !optional}\"></label>\r\n    <div>\r\n        <input type=\"text\" class=\"form-control\" df-input />\r\n\r\n        <div class=\"sy-form-error\" df-validation>\r\n        </div>\r\n    </div>\r\n</div>");
-$templateCache.put("templates/myaccount/radio.html","<div sy-form-group data-layout=\"form\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <label class=\"control-label\" df-label ng-class=\"{\'label-required\': !optional}\"></label>\r\n    <div>\r\n        <input type=\"text\" class=\"form-control\" df-input />\r\n\r\n        <div class=\"sy-form-error\" df-validation></div>\r\n    </div>\r\n</div>");
-$templateCache.put("templates/npw/checkbox.html","<div class=\"field-group\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <input type=\"checkbox\" class=\"filter-input\" df-input>\r\n    <label class=\"filter-label\" df-label></label>\r\n</div>");
-$templateCache.put("templates/npw/input.html","<div class=\"field-group\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}\"\r\n     ng-show=\"<%= show %>\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input />\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
-$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
-$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 angular.module('dynamicForms').directive('dfEdit', function() {
     return {
         restrict: 'A',
@@ -224,6 +219,14 @@ angular.module('dynamicForms').directive('dfEdit', function() {
         templateUrl: 'directives/model/column/components/df-edit.html'
     }
 });
+angular.module("dynamicForms").run(["$templateCache", function($templateCache) {$templateCache.put("templates/custom/pay-radios.html","<div ng-repeat=\"card in payCtrl.storedCards\">\r\n    <label for=\"card{{$index}}\">\r\n        <input type=\"radio\" class=\"sy-radio\" name=\"cardIndex\" ng-model=\"payCtrl.model.cardIndex\" id=\"card{{$index}}\" value=\"{{$index}}\" ng-value=\"{{$index}}\" />\r\n        {{card.maskedCreditCardNumber}}\r\n    </label>\r\n</div>");
+$templateCache.put("templates/default/input.html","<div class=\"df-column\" df-column=\"<%= column %>\" df-mode=\"<%= mode %>\">\r\n\r\n    <label df-label class=\"df-label\"></label>\r\n\r\n    <div>\r\n        <input df-input class=\"df-input\" />\r\n        <div class=\"messages\">\r\n            <div df-edit class=\"df-edit\"></div>\r\n            <div df-help class=\"df-help\"></div>\r\n            <div df-validation class=\"df-validation\"></div>\r\n        </div>\r\n    </div>\r\n\r\n    <div df-edit-controls class=\"df-edit-controls\"></div>\r\n\r\n</div>");
+$templateCache.put("templates/myaccount/input.html","<div sy-form-group data-layout=\"form\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <label class=\"control-label\" df-label ng-class=\"{\'label-required\': !optional}\"></label>\r\n    <div>\r\n        <input type=\"text\" class=\"form-control\" df-input />\r\n\r\n        <div sy-alert-box=\"<%= column.name %>\" df-validation>\r\n        </div>\r\n    </div>\r\n</div>");
+$templateCache.put("templates/myaccount/radio.html","<div sy-form-group data-layout=\"form\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <label class=\"control-label\" df-label ng-class=\"{\'label-required\': !optional}\"></label>\r\n    <div>\r\n        <input type=\"text\" class=\"form-control\" df-input />\r\n\r\n        <div class=\"sy-form-error\" df-validation></div>\r\n    </div>\r\n</div>");
+$templateCache.put("templates/npw/checkbox.html","<div class=\"field-group\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\" ng-show=\"<%= show %>\">\r\n    <input type=\"checkbox\" class=\"filter-input\" df-input>\r\n    <label class=\"filter-label\" df-label></label>\r\n</div>");
+$templateCache.put("templates/npw/input.html","<div class=\"field-group\" df-column=\"<%= column.name %>\" df-mode=\"<%= mode %>\"\r\n     ng-class=\"{\'field-group-tooltip--active\': columnCtrl.displayHelp(), \'field-group--error\': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}\"\r\n     ng-show=\"<%= show %>\">\r\n\r\n    <div class=\"form-input-container\">\r\n        <label class=\"form-label\" df-label></label>\r\n        <input type=\"text\" class=\"form-input\" df-input />\r\n    </div>\r\n\r\n\r\n    <button type=\"button\" class=\"form-tooltip-toggle\" ng-click=\"columnCtrl.toggleHelp()\">\r\n        <span>Show help information</span>\r\n    </button>\r\n\r\n    <!--Help-->\r\n    <div class=\"form-tooltip form-tooltip--feature-aside\" df-help>\r\n    </div>\r\n\r\n    <!--Validation-->\r\n    <div class=\"form-error\" df-validation>\r\n    </div>\r\n</div>\r\n");
+$templateCache.put("directives/model/column/components/df-edit-controls.html","<button class=\"df-cancel-edit\" ng-click=\"columnCtrl.cancelEdit()\">\r\n    Cancel\r\n</button>\r\n<button class=\"df-save-edit\" ng-click=\"columnCtrl.saveEdit()\">\r\n    Save\r\n</button>");
+$templateCache.put("directives/model/column/components/df-edit.html","<button class=\"df-edit-button\" ng-click=\"columnCtrl.startEdit()\" ng-if=\"columnCtrl.isReadonly()\">\r\n    Edit\r\n</button>");}]);
 angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaService) {
     return {
         restrict: 'A',

@@ -1,0 +1,6 @@
+<div ng-repeat="card in payCtrl.storedCards">
+    <label for="card{{$index}}">
+        <input type="radio" class="sy-radio" name="cardIndex" ng-model="payCtrl.model.cardIndex" id="card{{$index}}" value="{{$index}}" ng-value="{{$index}}" />
+        {{card.maskedCreditCardNumber}}
+    </label>
+</div>

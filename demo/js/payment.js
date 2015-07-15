@@ -29,6 +29,10 @@ angular.module('payment', ['dynamicForms'])
                 help: "This is the amount you want to pay."
             },
             {
+                name: 'cardIndex',
+                template: 'templates/custom/pay-radios.html'
+            },
+            {
                 name: 'cardHolderName',
                 label: 'Card holder name',
                 validators: {

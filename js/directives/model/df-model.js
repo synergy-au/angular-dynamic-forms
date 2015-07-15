@@ -23,11 +23,13 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
                 form = tAttrs.ngForm;
 
             _.each(schema, function(column) {
-                var template = $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
+                var props = {controller: controller, column: column, form: form, mode: mode};
 
-                var show = column.show ? _.template(column.show)({controller: controller, model: model, column: column, mode: mode}) : true;
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
 
-                tElement.append( $templateCache.get(column.template) || _.template(template)({column: column, form: form, show: show, mode: mode}) );
+                props.show = column.show ? _.template(column.show)(props) : true;
+
+                tElement.append( _.template(template)(props) );
             });
         }
     }
