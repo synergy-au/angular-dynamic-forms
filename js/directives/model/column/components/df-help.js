@@ -3,6 +3,7 @@ angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaSe
         restrict: 'A',
         link: function(scope, element, attrs) {
             DfSchemaService.appendColumnValue(element, 'help');
+            $compile(element.contents())(scope);
         }
     }
 });

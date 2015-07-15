@@ -1,20 +1,31 @@
-angular.module('dynamicForms').directive('dfModel', function($templateCache, DfSchemaService) {
+angular.module('dynamicForms').directive('dfModel', function($templateCache, DfUtils) {
+    function resolveType (type) {
+        switch(type) {
+            case 'radio':
+                return '/radio.html';
+            case 'inputgroup':
+                return '/inputgroup.html';
+            default:
+                return '/input.html';
+        }
+    }
+
     return {
         restrict: 'EA',
         priority: 1100,
         compile: function(tElement, tAttrs) {
-            var columns = DfSchemaService.extractColumns(tAttrs.dfSchema),
+            var schema = DfUtils.getDependency(tAttrs.dfSchema),
                 controller = tAttrs.dfController,
                 model = tAttrs.dfModelInstance,
                 mode = tAttrs.dfMode,
                 form = tAttrs.ngForm;
 
-            var template = $templateCache.get('templates/' + (tAttrs.dfTemplate || 'default') + '.html');
+            _.each(schema, function(column) {
+                var template = $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
 
-            _.each(columns, function(it) {
-                var show = it.show ? _.template(it.show)({controller: controller, model: model}) : true;
+                var show = column.show ? _.template(column.show)({controller: controller, model: model}) : true;
 
-                tElement.append( $templateCache.get(it.template) || _.template(template)({form: form, show: show, column: it.column, mode: mode}) );
+                tElement.append( $templateCache.get(column.template) || _.template(template)({column: column, form: form, show: show, mode: mode}) );
             });
         }
     }

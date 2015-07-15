@@ -20,28 +20,21 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
     this.extractValue = function(element, key) {
         var schema = this.findSchema(element);
         return _(schema)
-            .where({column: this.findColumn(element)})    // pluck value
+            .where({name: this.findColumn(element)})    // pluck value
             .pluck(key)
             .value().pop();
     };
 
-    this.extractColumns = function(schema) {
-        var schema = $injector.get(schema);
-        return _.map(schema, function(it){
-            return { column: it.column, template: it.template, show: it.show };
-        });
-    };
-
     this.extractColumn = function(schema, column) {
         var schema = $injector.get(schema);
-        return _.find(schema, {column: column});
+        return _.find(schema, {name: column});
     };
 
     this.extractValidators = function(schema, column) {
         var schema = $injector.get(schema);
 
         return _.chain(schema)
-                    .where({column: column})
+                    .where({name: column})
                     .pluck('validators')
                     .map(function(validators){
                         return _.defaults(validators || {}, defaults(column));
@@ -54,6 +47,8 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
     };
     this.appendColumnValue = function(element, key) {
         var value = this.extractValue(element, key);
-        element.append(value);
+        var controller = element.closestAttribute('df-controller');
+        var model = element.closestAttribute('df-model-instance');
+        element.append(_.template(value)({model: model, controller: controller}));
     };
 });

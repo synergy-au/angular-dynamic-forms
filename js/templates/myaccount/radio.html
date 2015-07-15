@@ -1,0 +1,8 @@
+<div sy-form-group data-layout="form" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+    <label class="control-label" df-label ng-class="{'label-required': !optional}"></label>
+    <div>
+        <input type="text" class="form-control" df-input />
+
+        <div class="sy-form-error" df-validation></div>
+    </div>
+</div>

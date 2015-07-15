@@ -14,13 +14,13 @@ angular.module('payment', ['dynamicForms'])
         var schema = [
             {
                 show: '!<%= controller %>.existingAccount',
-                column: 'paymentNumber',
+                name: 'paymentNumber',
                 label: 'Payment number',
                 validation: "<p>The payment number provided is invalid. It's the 10 digit number at the bottom of your bill.",
                 help: "This is the ten digit number on the bottom of your bill."
             },
             {
-                column: 'amount',
+                name: 'amount',
                 label: 'Amount ($)',
                 validators: {
                     "min": 0.01
@@ -29,7 +29,7 @@ angular.module('payment', ['dynamicForms'])
                 help: "This is the amount you want to pay."
             },
             {
-                column: 'cardHolderName',
+                name: 'cardHolderName',
                 label: 'Card holder name',
                 validators: {
                     "maxlength": 60
@@ -38,7 +38,7 @@ angular.module('payment', ['dynamicForms'])
                 help: "This is the name on your card."
             },
             {
-                column: 'cardNumber',
+                name: 'cardNumber',
                 label: 'Card number',
                 validators: {
                     "maxlength": 60
@@ -47,28 +47,21 @@ angular.module('payment', ['dynamicForms'])
                 help: "This is the number on your card."
             },
             {
-                column: 'expiryMonth',
+                name: 'expiry',
                 label: 'Expiry month',
                 validators: {},
-                validation: "<p>Please enter an expiry month.</p>",
+                validation: "<p>Please enter your expiry month and year.</p>",
                 help: "This is the number on your card."
             },
             {
-                column: 'expiryYear',
-                label: 'Expiry year',
-                validators: {},
-                validation: "<p>Please enter an expiry year.</p>",
-                help: "This is the year on your card."
-            },
-            {
-                column: 'cvv',
+                name: 'cvv',
                 label: 'Card verification value (CVV)',
                 validators: {
                     "ng-minlength": 3,
                     "ng-maxlength": 4
                 },
                 validation: "<p>Your CVV is the last digits of the number on the reverse side of your card.</p>",
-                help: "This is the {{cardType === 'amex' ? 4 : 3}}  digits on the back of your card."
+                help: "This is the {{<%= model %>.cvv === '999' ? 4 : 3}}  digits on the back of your card."
             }
         ];
 
