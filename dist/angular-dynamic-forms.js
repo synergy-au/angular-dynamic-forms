@@ -92,7 +92,7 @@ angular.module('dynamicForms').service('DfUtils', function ($injector) {
         return dependencyName ? $injector.get(dependencyName) : undefined;
     }
 });
-angular.module('dynamicForms').directive('dfModel', function($templateCache, DfUtils) {
+angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils) {
     function resolveType (type) {
         switch(type) {
             case 'radio':
@@ -104,6 +104,14 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
             default:
                 return '/input.html';
         }
+    }
+
+    function getTemplateDirectory(tAttrs) {
+        if (tAttrs.dfTemplate) {
+            return tAttrs.dfTemplate;
+        }
+        var sessionService = $injector.has('DfSessionService') ? $injector.get('DfSessionService') : null;
+        return sessionService && $injector.get(sessionService).isLoggedIn() ? 'myaccount' : 'npw';
     }
 
     return {
@@ -119,7 +127,7 @@ angular.module('dynamicForms').directive('dfModel', function($templateCache, DfU
             _.each(schema, function(column) {
                 var props = {controller: controller, column: column, form: form, mode: mode, model: model};
 
-                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tAttrs.dfTemplate + resolveType(column.type));
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + getTemplateDirectory(tAttrs) + resolveType(column.type));
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 
