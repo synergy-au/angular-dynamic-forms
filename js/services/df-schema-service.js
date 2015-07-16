@@ -52,4 +52,10 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         var model = element.closestAttribute('df-model-instance');
         element.append(_.template(value)({model: model, controller: controller}));
     };
+    this.getColumnValue = function(element, key) {
+        var value = this.extractValue(element, key);
+        var controller = element.closestAttribute('df-controller');
+        var model = element.closestAttribute('df-model-instance');
+        return _.template(value)({model: model, controller: controller});
+    };
 });

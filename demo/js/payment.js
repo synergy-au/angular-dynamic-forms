@@ -17,6 +17,7 @@ angular.module('payment', ['dynamicForms'])
                 name: 'paymentNumber',
                 label: 'Payment number',
                 validation: "<p>The payment number provided is invalid. It's the 10 digit number at the bottom of your bill.",
+                helpImage: 'http://www.menucool.com/slider/jsImgSlider/images/image-slider-3.jpg',
                 help: "This is the ten digit number on the bottom of your bill."
             },
             {
