@@ -1,4 +1,4 @@
-<div sy-form-group data-layout="form" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+<div sy-form-group data-layout="df-form-<%= mode %>" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
     <label class="control-label" df-label ng-class="{'label-required': !optional}"></label>
     <div>
         <input type="text" class="form-control" df-input />
