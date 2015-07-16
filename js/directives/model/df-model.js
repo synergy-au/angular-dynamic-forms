@@ -29,18 +29,18 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
                 model = tAttrs.dfModelInstance,
                 mode = tAttrs.dfMode,
                 form = tAttrs.ngForm,
-                tenmplateDir = getTemplateDirectory(tAttrs);
+                templateDir = getTemplateDirectory(tAttrs);
 
             var props = {controller: controller, form: form, mode: mode, model: model};
 
-            var wrapper = _.template($templateCache.get('templates/' + tenmplateDir + '/wrapper.html'))(props);
+            var wrapper = _.template($templateCache.get('templates/' + templateDir + '/wrapper.html'))(props);
             var wrapperElement = angular.element(wrapper);
             tElement.prepend(wrapperElement);
 
             _.each(schema, function(column) {
                 props.column = column;
 
-                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tenmplateDir + resolveType(column.type));
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + templateDir + resolveType(column.type));
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 
