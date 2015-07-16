@@ -1,0 +1,11 @@
+<div class="field-group field-group field-group--checkbox"
+     ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}"
+     df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+
+    <div class="form-input-container">
+        <input type="checkbox" class="form-input" df-input />
+        <label class="form-label" for="<%= column.name %>">
+            I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.
+        </label>
+    </div>
+</div>

@@ -1,10 +1,13 @@
 angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils) {
-    function resolveType (type) {
+    function resolveType (column) {
+        var type = column.customType || column.type;
         switch(type) {
             case 'radio':
                 return '/radio.html';
             case 'inputgroup':
                 return '/inputgroup.html';
+            case 'terms':
+                return '/terms.html';
             case 'checkbox':
                 return '/checkbox.html';
             default:
@@ -40,7 +43,7 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
             _.each(schema, function(column) {
                 props.column = column;
 
-                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + templateDir + resolveType(column.type));
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + templateDir + resolveType(column));
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 

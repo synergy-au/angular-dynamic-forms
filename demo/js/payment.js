@@ -71,8 +71,8 @@ angular.module('payment', ['dynamicForms'])
             {
                 name: 'termsAccepted',
                 show: "'<%= mode %>' === 'read'",
-                type: 'checkbox',
-                label: 'I understand that use of this service constitutes acceptance of terms & conditions.'
+                customType: 'terms',
+                type: 'checkbox'
             }
         ];
 
