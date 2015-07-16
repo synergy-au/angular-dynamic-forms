@@ -28,16 +28,23 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
                 controller = tAttrs.dfController,
                 model = tAttrs.dfModelInstance,
                 mode = tAttrs.dfMode,
-                form = tAttrs.ngForm;
+                form = tAttrs.ngForm,
+                tenmplateDir = getTemplateDirectory(tAttrs);
+
+            var props = {controller: controller, form: form, mode: mode, model: model};
+
+            var wrapper = _.template($templateCache.get('templates/' + tenmplateDir + '/wrapper.html'))(props);
+            var wrapperElement = angular.element(wrapper);
+            tElement.prepend(wrapperElement);
 
             _.each(schema, function(column) {
-                var props = {controller: controller, column: column, form: form, mode: mode, model: model};
+                props.column = column;
 
-                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + getTemplateDirectory(tAttrs) + resolveType(column.type));
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + tenmplateDir + resolveType(column.type));
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 
-                tElement.append( _.template(template)(props) );
+                wrapperElement.find('mainform').append( _.template(template)(props) );
             });
         }
     }

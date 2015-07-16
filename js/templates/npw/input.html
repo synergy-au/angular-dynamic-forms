@@ -1,22 +1,37 @@
-<div class="field-group" df-column="<%= column.name %>" df-mode="<%= mode %>"
-     ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}"
-     ng-show="<%= show %>">
+<span ng-class="{'payment-status-meta-group': '<%= mode %>' === 'read', 'payment-status-meta-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
 
-    <div class="form-input-container">
-        <label class="form-label" df-label></label>
-        <input type="text" class="form-input" df-input />
-    </div>
+    <dt class="payment-status-meta-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
+
+    <dd ng-class="{'payment-status-meta-data': '<%= mode %>' === 'read'}">
+
+        <div class="field-group"
+             ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}">
+
+            <div class="form-input-container">
+                <label class="form-label" df-label></label>
+                <input type="text" class="form-input" df-input />
+            </div>
 
 
-    <button type="button" class="form-tooltip-toggle" ng-click="columnCtrl.toggleHelp()">
-        <span>Show help information</span>
-    </button>
+            <button type="button" class="form-tooltip-toggle" ng-click="columnCtrl.toggleHelp()">
+                <span>Show help information</span>
+            </button>
 
-    <!--Help-->
-    <div class="form-tooltip form-tooltip--feature-aside" df-help>
-    </div>
+            <!--Help-->
+            <div class="form-tooltip form-tooltip--feature-aside" df-help>
+            </div>
 
-    <!--Validation-->
-    <div class="form-error" df-validation>
-    </div>
-</div>
+            <!--Validation-->
+            <div class="form-error" df-validation>
+            </div>
+        </div>
+
+    </dd>
+
+    <dd class="payment-status-meta-edit" ng-show="'<%= mode %>' === 'read'">
+        <button type="button" class="btn btn--cancel" ng-click="columnCtrl.cancelEdit()">Cancel</button>
+        <button type="button" class="btn btn--save" ng-click="columnCtrl.saveEdit()">Save</button>
+        <button type="button" class="btn btn--edit" ng-click="columnCtrl.startEdit()">Edit</button>
+    </dd>
+
+</span>

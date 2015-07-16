@@ -1,0 +1,8 @@
+dd {
+    margin-start: 0px;
+    -webkit-margin-start: 0px;
+}
+
+.form-tooltip {
+    top:0px !important;
+}

@@ -47,20 +47,24 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
         return model.currentMode === 'read';
     };
 
+    this.inEdit = function() {
+        return model.currentMode === 'edit';
+    };
+
     this.displayHelp = function() {
         return model.help;
     };
 
     var setMode = function(mode) {
-        model.element.toggleClass(
+        /*model.element.toggleClass(
             DfUtils.classesForStates([model.currentMode, mode])
-        );
+        );*/
         toggleInputMode(mode);
         model.currentMode = mode;
     };
 
     var toggleInputMode = function (mode) {
-        model.input.attr('disabled', mode === 'read');
+        model.input.attr('readonly', mode === 'read');
     };
 
     $rootScope.$on('df_input_focus', function(val) {

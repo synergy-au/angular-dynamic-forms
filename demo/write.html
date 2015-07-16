@@ -1,37 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Forms</title>
-    <link rel="shortcut icon" href="img/favicon.ico" />
+<div ng-app="payment">
 
-    <link rel="stylesheet" href="/lib/angular/angular-csp.css"/>
-    <link rel="stylesheet" href="/lib/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="/dist/angular-dynamic-forms.css"/>
+    <form method="post" ng-controller="PayController as payCtrl" name="wizardForm">
 
-</head>
-<body>
+        <div ng-form="paymentForm"
+             df-model
+             df-template="npw"
+             df-schema="PaymentModel"
+             df-controller="payCtrl"
+             df-model-instance="payCtrl.model"
+             df-mode="read"></div>
 
-    <div ng-app="payment" style="width: 550px">
+    </form>
 
-        <form method="post" ng-controller="PayController as payCtrl" name="wizardForm">
-
-            <div ng-form="paymentForm"
-                 df-model
-                 df-template="npw"
-                 df-schema="PaymentModel"
-                 df-controller="payCtrl"
-                 df-model-instance="payCtrl.model"
-                 df-mode="write"></div>
-
-        </form>
-
-    </div>
-
-    <script type="text/javascript" src="/lib/angular/angular.js"></script>
-    <script type="text/javascript" src="/lib/lodash-compat/lodash.js"></script>
-    <script type="text/javascript" src="/dist/angular-dynamic-forms.js"></script>
-
-    <script type="text/javascript" src="js/payment.js"></script>
-
-</body>
-</html>
+</div>
