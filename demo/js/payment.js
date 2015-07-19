@@ -10,6 +10,14 @@ angular.module('payment', ['dynamicForms'])
             expiryYear: 15
         };
     })
+    .factory('TermsModel', function() {
+        var schema = [{
+            name: 'termsAccepted',
+            customType: 'terms',
+            type: 'checkbox'
+        }];
+        return schema;
+    })
     .factory('PaymentModel', function() {
         var schema = [
             {
@@ -67,12 +75,6 @@ angular.module('payment', ['dynamicForms'])
                 },
                 validation: "<p>Your CVV is the last digits of the number on the reverse side of your card.</p>",
                 help: "This is the {{<%= model %>.cvv === '999' ? 4 : 3}}  digits on the back of your card."
-            },
-            {
-                name: 'termsAccepted',
-                show: "'<%= mode %>' === 'read'",
-                customType: 'terms',
-                type: 'checkbox'
             }
         ];
 

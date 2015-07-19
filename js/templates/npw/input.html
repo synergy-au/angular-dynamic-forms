@@ -1,4 +1,4 @@
-<span class="sy-field-wrapper" ng-class="{'payment-status-meta-group': '<%= mode %>' === 'read', 'payment-status-meta-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+<span ng-class="{'sy-field-wrapper': <%= show %>, 'payment-status-meta-group': '<%= mode %>' === 'read', 'payment-status-meta-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
 
     <dt class="payment-status-meta-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
 

@@ -1,4 +1,4 @@
-angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils) {
+angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils, DfSchemaService) {
     function resolveType (column) {
         var type = column.customType || column.type;
         switch(type) {
@@ -27,17 +27,13 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
         restrict: 'EA',
         priority: 1100,
         compile: function(tElement, tAttrs) {
-            var schema = DfUtils.getDependency(tAttrs.dfSchema),
-                controller = tAttrs.dfController,
-                model = tAttrs.dfModelInstance,
-                mode = tAttrs.dfMode,
-                form = tAttrs.ngForm,
-                templateDir = getTemplateDirectory(tAttrs);
-
-            var props = {controller: controller, form: form, mode: mode, model: model};
+            var props = DfSchemaService.getSchemaProps(tAttrs)
+            var schema = DfUtils.getDependency(props.schema);
+            var templateDir = getTemplateDirectory(tAttrs);
 
             var wrapper = _.template($templateCache.get('templates/' + templateDir + '/wrapper.html'))(props);
             var wrapperElement = angular.element(wrapper);
+
             tElement.prepend(wrapperElement);
 
             _.each(schema, function(column) {

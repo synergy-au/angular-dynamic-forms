@@ -17,6 +17,30 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         return element.attr('df-column') || element.closestAttribute('df-column');
     };
 
+    this.getSchemaProps = function(tAttrs) {
+        return {
+            schema: tAttrs.dfSchema,
+            controller: tAttrs.dfController,
+            model: tAttrs.dfModelInstance,
+            mode: tAttrs.dfMode,
+            form: tAttrs.ngForm,
+            fullWidth: tAttrs.dfFullWidth ? "{'width':'100%','max-width':'none'}" : "{}"
+        };
+    };
+
+    this.getInputProps = function(element) {
+        var inputProps = {
+            schema: element.closestAttribute('df-schema'),
+            column: element.closestAttribute('df-column'),
+            model: element.closestAttribute('df-model-instance') || 'model',
+            controller: element.closestAttribute('df-controller'),
+            mode: element.closestAttribute( 'df-mode' ) || 'write'
+        };
+        inputProps.columnDetails = this.extractColumn(inputProps.schema, inputProps.column);
+        inputProps.validators = this.extractValidators(inputProps.schema, inputProps.column);
+        return inputProps;
+    };
+
     this.extractValue = function(element, key) {
         var schema = this.findSchema(element);
         return _(schema)
