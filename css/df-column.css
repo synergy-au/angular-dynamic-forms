@@ -2,7 +2,7 @@
 Quite simple really.
 A column can run in three modes - write, read and edit.
 Write - label on top, input half width, help text half width and validation half width (below input).
-Read - label alongside input, edit button to the right
+Read - label alongside input, edit button to the right.
 Edit - label alongside input, save and edit buttons below.
 */
 
@@ -101,4 +101,3 @@ Edit - label alongside input, save and edit buttons below.
 .df-edit-controls .df-save-edit {
     float: right;
 }
-
