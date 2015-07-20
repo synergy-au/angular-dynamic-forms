@@ -142,7 +142,7 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
 
     function getTemplateDirectory(tAttrs) {
         if (tAttrs.dfTemplate) {
-            return tAttrs.dfTemplxate;
+            return tAttrs.dfTemplate;
         }
         var sessionService = $injector.has('DfSessionService') ? $injector.get('DfSessionService') : null;
         return sessionService && $injector.get(sessionService).isLoggedIn() ? 'myaccount' : 'npw';
@@ -157,9 +157,8 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
             var templateDir = getTemplateDirectory(tAttrs);
 
             var wrapper = _.template($templateCache.get('templates/' + templateDir + '/wrapper.html'))(props);
-            var wrapperElement = angular.element(wrapper);
 
-            tElement.prepend(wrapperElement);
+            tElement.prepend( wrapper );
 
             _.each(schema, function(column) {
                 props.column = column;
@@ -168,7 +167,7 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 
-                wrapperElement.find('mainform').append( _.template(template)(props) );
+                tElement.find('mainform').append( _.template(template)(props) );
             });
         }
     }
