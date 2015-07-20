@@ -5,7 +5,7 @@
     <dd ng-class="{'payment-status-meta-data': '<%= mode %>' === 'read'}">
 
         <div class="field-group"
-             ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty}">
+             ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty && <%= form %>.<%= column.name %>.hasVisited}">
 
             <div class="form-input-container">
                 <label class="form-label" df-label></label>
@@ -21,7 +21,7 @@
             <div class="form-tooltip" df-help ng-class="{'tooltip--image-with-caption': '<%= column.helpImage %>'}">
                 <img src="" class="tooltip-image" alt=""/>
                 <div class="tooltip-description">
-
+                    <p></p>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
     <dd class="payment-status-meta-edit" ng-show="'<%= mode %>' === 'read'">
         <button type="button" class="btn btn--cancel" ng-click="columnCtrl.cancelEdit()">Cancel</button>
         <button type="button" class="btn btn--save" ng-click="columnCtrl.saveEdit()">Save</button>
-        <button type="button" class="btn btn--edit" ng-click="columnCtrl.startEdit()">Edit</button>
+        <button type="button" class="btn btn--edit" ng-hide="<%= column.noEdit %>" ng-click="columnCtrl.startEdit()">Edit</button>
     </dd>
 
 </span>

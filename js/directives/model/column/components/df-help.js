@@ -12,7 +12,7 @@ angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaSe
             }
 
             if (help) {
-                element.find('div').append(help);
+                element.find('div p').append(help);
             }
 
             $compile(element.contents())(scope);

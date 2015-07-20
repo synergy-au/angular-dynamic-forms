@@ -6,7 +6,8 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
             "ng-required": true,
             "type": column.type || "text",
             "id": column.name,
-            "name": column.name
+            "name": column.name,
+            "placeholder": column.placeholder || column.name
         };
     };
 
@@ -24,7 +25,7 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
             model: tAttrs.dfModelInstance,
             mode: tAttrs.dfMode,
             form: tAttrs.ngForm,
-            fullWidth: tAttrs.dfFullWidth ? "{'width':'100%','max-width':'none'}" : "{}"
+            formStyle: tAttrs.dfFormStyle || "{}"
         };
     };
 

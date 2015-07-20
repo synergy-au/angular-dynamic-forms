@@ -18,6 +18,7 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
 
     this.startEdit  = function () {
         model.savedValue = model.input.val();
+        model.help = true;
         setMode('edit');
     };
 
