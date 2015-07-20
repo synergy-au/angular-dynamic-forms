@@ -54,6 +54,8 @@ angular.module('payment', ['dynamicForms'])
             {
                 name: 'cardNumber',
                 label: 'Card number',
+                type: "text",
+                customType: 'privacy',
                 validators: {
                     "maxlength": 60
                 },

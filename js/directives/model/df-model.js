@@ -1,20 +1,4 @@
 angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils, DfSchemaService) {
-    function resolveType (column) {
-        var type = column.customType || column.type;
-        switch(type) {
-            case 'radio':
-                return '/radio.html';
-            case 'inputgroup':
-                return '/inputgroup.html';
-            case 'terms':
-                return '/terms.html';
-            case 'checkbox':
-                return '/checkbox.html';
-            default:
-                return '/input.html';
-        }
-    }
-
     function getTemplateDirectory(tAttrs) {
         if (tAttrs.dfTemplate) {
             return tAttrs.dfTemplate;
@@ -38,7 +22,8 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
             _.each(schema, function(column) {
                 props.column = column;
 
-                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + templateDir + resolveType(column));
+                // Use a manual template if provided , otherwise look for a custom template if it exists or else fallback to the standard input.
+                var template = $templateCache.get(column.template) || $templateCache.get('templates/' + templateDir + "/" + (column.customType || column.type)  + ".html") || $templateCache.get('templates/' + templateDir + "/input.html");
 
                 props.show = column.show ? _.template(column.show)(props) : true;
 

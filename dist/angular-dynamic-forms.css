@@ -194,6 +194,7 @@ dd {
 /**
  * Webfont includes
  */
+
 /**
  * normalize.css v3.0.0 | MIT License | git.io/normalize
  */
@@ -573,7 +574,7 @@ fieldset {
  *
  * Define reusable button components
  */
-.form-input--button, .payment-status-container .btn--restart, .promo-button, .payment-status-container--review .btn--confirm {
+.form-input--button, .modal .btn, .submission-datalist .btn--restart, .promo-button, .submission-status-container--review .btn--confirm {
     display: inline-block;
     min-width: 112px;
     padding: 10px 20px;
@@ -588,18 +589,19 @@ fieldset {
     font-family: "Proxima Nova W01", Futura, "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
     font-weight: 400; }
 @media (min-width: 610px) {
-    .form-input--button, .payment-status-container .btn--restart, .promo-button, .payment-status-container--review .btn--confirm {
+    .form-input--button, .modal .btn, .submission-datalist .btn--restart, .promo-button, .submission-status-container--review .btn--confirm {
         padding-right: 20px;
         padding-left: 20px; } }
 .form-input--button:hover,
-.payment-status-container .btn--restart:hover,
+.modal .btn:hover,
+.submission-datalist .btn--restart:hover,
 .promo-button:hover,
-.payment-status-container--review .btn--confirm:hover,
-.form-input--button:focus, .payment-status-container .btn--restart:focus, .promo-button:focus, .payment-status-container--review .btn--confirm:focus {
+.submission-status-container--review .btn--confirm:hover,
+.form-input--button:focus, .modal .btn:focus, .submission-datalist .btn--restart:focus, .promo-button:focus, .submission-status-container--review .btn--confirm:focus {
     background-color: #333a3c;
     color: #efbd46;
     fill: #efbd46; }
-.dark-contrast .form-input--button, .dark-contrast .payment-status-container .btn--restart, .payment-status-container .dark-contrast .btn--restart, .dark-contrast .promo-button, .dark-contrast .payment-status-container--review .btn--confirm, .payment-status-container--review .dark-contrast .btn--confirm {
+.dark-contrast .form-input--button, .dark-contrast .modal .btn, .modal .dark-contrast .btn, .dark-contrast .submission-datalist .btn--restart, .submission-datalist .dark-contrast .btn--restart, .dark-contrast .promo-button, .dark-contrast .submission-status-container--review .btn--confirm, .submission-status-container--review .dark-contrast .btn--confirm {
     display: inline-block;
     min-width: 112px;
     padding: 10px 20px;
@@ -616,22 +618,24 @@ fieldset {
     border: 2px solid #efbd46;
     line-height: 16px; }
 @media (min-width: 610px) {
-    .dark-contrast .form-input--button, .dark-contrast .payment-status-container .btn--restart, .payment-status-container .dark-contrast .btn--restart, .dark-contrast .promo-button, .dark-contrast .payment-status-container--review .btn--confirm, .payment-status-container--review .dark-contrast .btn--confirm {
+    .dark-contrast .form-input--button, .dark-contrast .modal .btn, .modal .dark-contrast .btn, .dark-contrast .submission-datalist .btn--restart, .submission-datalist .dark-contrast .btn--restart, .dark-contrast .promo-button, .dark-contrast .submission-status-container--review .btn--confirm, .submission-status-container--review .dark-contrast .btn--confirm {
         padding-right: 20px;
         padding-left: 20px; } }
 .dark-contrast .form-input--button:hover,
-.dark-contrast .payment-status-container .btn--restart:hover,
-.payment-status-container .dark-contrast .btn--restart:hover, .dark-contrast .promo-button:hover,
-.dark-contrast .payment-status-container--review .btn--confirm:hover,
-.payment-status-container--review .dark-contrast .btn--confirm:hover, .dark-contrast .form-input--button:focus, .dark-contrast .payment-status-container .btn--restart:focus, .payment-status-container .dark-contrast .btn--restart:focus, .dark-contrast .promo-button:focus, .dark-contrast .payment-status-container--review .btn--confirm:focus, .payment-status-container--review .dark-contrast .btn--confirm:focus {
+.dark-contrast .modal .btn:hover,
+.modal .dark-contrast .btn:hover, .dark-contrast .submission-datalist .btn--restart:hover,
+.submission-datalist .dark-contrast .btn--restart:hover, .dark-contrast .promo-button:hover,
+.dark-contrast .submission-status-container--review .btn--confirm:hover,
+.submission-status-container--review .dark-contrast .btn--confirm:hover, .dark-contrast .form-input--button:focus, .dark-contrast .modal .btn:focus, .modal .dark-contrast .btn:focus, .dark-contrast .submission-datalist .btn--restart:focus, .submission-datalist .dark-contrast .btn--restart:focus, .dark-contrast .promo-button:focus, .dark-contrast .submission-status-container--review .btn--confirm:focus, .submission-status-container--review .dark-contrast .btn--confirm:focus {
     background-color: #333a3c;
     color: #efbd46;
     fill: #efbd46; }
 .dark-contrast .form-input--button:hover,
-.dark-contrast .payment-status-container .btn--restart:hover,
-.payment-status-container .dark-contrast .btn--restart:hover, .dark-contrast .promo-button:hover,
-.dark-contrast .payment-status-container--review .btn--confirm:hover,
-.payment-status-container--review .dark-contrast .btn--confirm:hover, .dark-contrast .form-input--button:focus, .dark-contrast .payment-status-container .btn--restart:focus, .payment-status-container .dark-contrast .btn--restart:focus, .dark-contrast .promo-button:focus, .dark-contrast .payment-status-container--review .btn--confirm:focus, .payment-status-container--review .dark-contrast .btn--confirm:focus {
+.dark-contrast .modal .btn:hover,
+.modal .dark-contrast .btn:hover, .dark-contrast .submission-datalist .btn--restart:hover,
+.submission-datalist .dark-contrast .btn--restart:hover, .dark-contrast .promo-button:hover,
+.dark-contrast .submission-status-container--review .btn--confirm:hover,
+.submission-status-container--review .dark-contrast .btn--confirm:hover, .dark-contrast .form-input--button:focus, .dark-contrast .modal .btn:focus, .modal .dark-contrast .btn:focus, .dark-contrast .submission-datalist .btn--restart:focus, .submission-datalist .dark-contrast .btn--restart:focus, .dark-contrast .promo-button:focus, .dark-contrast .submission-status-container--review .btn--confirm:focus, .submission-status-container--review .dark-contrast .btn--confirm:focus {
     border-color: #efbd46; }
 
 /**
@@ -1302,6 +1306,9 @@ fieldset {
     .field-group--privacy .form-input-container {
         width: 66%; } }
 
+.field-group--creditcard .form-input-description {
+    position: relative; }
+
 .form-details--credit-card {
     margin-top: 15px; }
 .form-details--credit-card:after {
@@ -1412,6 +1419,12 @@ fieldset {
 .svg .form-input--private .form-input--privacy-toggle:hover,
 .svg .form-input--private .form-input--privacy-toggle:focus {
     background-image: url("/images/icons/privacy-blocked-yellow.svg"); }
+.field-group--error .form-input--privacy-toggle,
+.form-input:focus + .form-input--privacy-toggle {
+    border: solid 2px #008f9a;
+    border-left: 0; }
+.field-group--error .form-input--privacy-toggle {
+    border-color: #c21c09; }
 
 .form-error {
     display: none;
@@ -1421,54 +1434,201 @@ fieldset {
 .form-error p:last-child {
     margin-bottom: 0; }
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 30px;
+    right: 15px;
+    bottom: 30px;
+    left: 15px;
+    z-index: 5;
+    max-width: 780px;
+    border-radius: 4px;
+    box-shadow: 0 0 45px 0 rgba(24, 33, 36, 0.2);
+    text-align: center;
+    padding: 20px; }
+@media (min-width: 610px) {
+    .modal {
+        padding: 30px; } }
+@media (min-width: 710px) {
+    .modal {
+        padding: 30px; } }
+@media (min-width: 1140px) {
+    .modal {
+        padding: 40px; } }
+@media (min-width: 1440px) {
+    .modal {
+        padding: 40px; } }
+@media (min-width: 610px) {
+    .modal {
+        top: 50%;
+        right: auto;
+        bottom: auto;
+        left: 50%;
+        width: 90%;
+        text-align: left;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        -ms-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%); } }
+@media (min-width: 1140px) {
+    .modal {
+        width: 60%; } }
+@media (min-width: 1440px) {
+    .modal {
+        padding: 50px; } }
+.modal.dark-contrast {
+    background-color: #464d50; }
+.modal--active {
+    display: block; }
+.modal .icon--close {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: none;
+    background: url("/images/icons/close-btn-white.png") no-repeat center;
+    background-size: 15px 15px; }
+.svg .modal .icon--close {
+    background-image: url("/images/icons/close-btn-white.svg"); }
+.modal .icon--close:hover,
+.modal .icon--close:focus {
+    background: url("/images/icons/close-btn-grey-30.png") no-repeat center;
+    background-size: 15px 15px; }
+.svg .modal .icon--close:hover,
+.svg .modal .icon--close:focus {
+    background-image: url("/images/icons/close-btn-grey-30.svg"); }
+.modal .icon--close span {
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: rect(0 0 0 0);
+    clip-path: rect(0 0 0 0);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
+.modal .modal-dialog {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    height: 100%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0); }
+@media (min-width: 610px) {
+    .modal .modal-dialog {
+        overflow: visible;
+        height: auto;
+        padding-left: 100px; } }
+@media (min-width: 1140px) {
+    .modal .modal-dialog {
+        padding-left: 110px; } }
+@media (min-width: 1440px) {
+    .modal .modal-dialog {
+        padding-left: 120px; } }
+.modal .modal-dialog:before {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1em;
+    content: "";
+    background: url("/images/icons/warning-circle-red-flat.png") no-repeat center;
+    background-size: 100%; }
+.svg .modal .modal-dialog:before {
+    background-image: url("/images/icons/warning-circle-red-flat.svg"); }
+@media (min-width: 610px) {
+    .modal .modal-dialog:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 70px; } }
+.modal .modal-title {
+    margin: 0;
+    font-family: "Proxima Nova Soft W03", Futura, "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.4em; }
+@media (min-width: 610px) {
+    .modal .modal-title {
+        font-size: 20px;
+        font-size: 1.25rem;
+        line-height: 1.4em; } }
+@media (min-width: 1140px) {
+    .modal .modal-title {
+        font-size: 20px;
+        font-size: 1.25rem;
+        line-height: 1.4em; } }
+@media (min-width: 1440px) {
+    .modal .modal-title {
+        font-size: 22px;
+        font-size: 1.375rem;
+        line-height: 1.4em; } }
+.modal .modal-body :first-child {
+    margin-top: 1em; }
+.modal .modal-footer {
+    text-align: center; }
+@media (min-width: 610px) {
+    .modal .modal-footer {
+        text-align: left; } }
+
 /**
  * Payment statuses
  */
-.payment-status-container {
+.submission-status-container {
     position: relative;
     padding-top: 20px;
     padding-bottom: 20px; }
-.payment-status-container:after {
+.submission-status-container:after {
     display: block;
     visibility: hidden;
     clear: both;
     height: 0;
     content: " ";
     font-size: 0; }
-*:first-child + html .payment-status-container {
+*:first-child + html .submission-status-container {
     zoom: 1; }
 @media (min-width: 610px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-top: 30px; } }
 @media (min-width: 710px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-top: 30px; } }
 @media (min-width: 1140px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-top: 40px; } }
 @media (min-width: 1440px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-top: 40px; } }
 @media (min-width: 610px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-bottom: 30px; } }
 @media (min-width: 710px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-bottom: 30px; } }
 @media (min-width: 1140px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-bottom: 40px; } }
 @media (min-width: 1440px) {
-    .payment-status-container {
+    .submission-status-container {
         padding-bottom: 40px; } }
-.payment-status-container .payment-status-icon.icon {
+
+.submission-status-icon {
     display: block;
     width: 50px;
     height: 50px;
     margin: 0 auto 5px;
-    content: ""; }
+    background-size: 100%;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         position: absolute;
         left: 0;
         width: 68px;
@@ -1476,47 +1636,69 @@ fieldset {
         margin: 5px 0 0;
         top: 20px; } }
 @media (min-width: 610px) and (min-width: 610px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         top: 30px; } }
 @media (min-width: 610px) and (min-width: 710px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         top: 30px; } }
 @media (min-width: 610px) and (min-width: 1140px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         top: 40px; } }
 @media (min-width: 610px) and (min-width: 1440px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         top: 40px; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-icon.icon {
+    .submission-status-icon {
         margin: 13px 0 0; } }
-.payment-status-container .payment-status-description {
+.submission-status-icon.icon--tick-circle {
+    background-image: url("/images/icons/tick-circle.png"); }
+.svg .submission-status-icon.icon--tick-circle {
+    background-image: url("/images/icons/tick-circle.svg"); }
+.submission-status-icon.icon--cross-circle {
+    background-image: url("/images/icons/cross-circle.png"); }
+.svg .submission-status-icon.icon--cross-circle {
+    background-image: url("/images/icons/cross-circle.svg"); }
+
+.submission-status-description {
     text-align: center; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-description {
+    .submission-status-description {
         margin: 0;
         padding: 0 0 0 87px;
         text-align: left; } }
-.payment-status-container .payment-status-title {
+@media (min-width: 610px) {
+    .submission-status-container--success .submission-status-description {
+        padding-right: 240px; } }
+
+.submission-status-title {
     font-size: 21px;
     font-size: 1.3125rem;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-title {
+    .submission-status-title {
         font-size: 24px;
         font-size: 1.5rem;
         line-height: 1.4em; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-title {
+    .submission-status-title {
         font-size: 28px;
         font-size: 1.75rem;
         line-height: 1.4em; } }
 @media (min-width: 1440px) {
-    .payment-status-container .payment-status-title {
+    .submission-status-title {
         font-size: 32px;
         font-size: 2rem;
         line-height: 1.4em; } }
-.payment-status-container .payment-status-subtitle {
+.submission-status-container--success .submission-status-title {
+    color: #6eb249; }
+.submission-status-container--declined .submission-status-title {
+    color: #c21c09; }
+@media (min-width: 610px) {
+    .submission-status-container--declined .submission-status-title {
+        height: 82px;
+        line-height: 82px; } }
+
+.submission-status-subtitle {
     margin: 0.5em 0;
     color: #8b9091;
     line-height: 1.4em;
@@ -1526,40 +1708,41 @@ fieldset {
     font-size: 1rem;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-subtitle {
+    .submission-status-subtitle {
         font-size: 20px;
         font-size: 1.25rem;
         line-height: 1.4em; } }
-.payment-status-container .payment-status-action {
+
+.submission-status-action {
     margin: 20px 0 0; }
-.payment-status-container .payment-status-action:after {
+.submission-status-action:after {
     display: block;
     visibility: hidden;
     clear: both;
     height: 0;
     content: " ";
     font-size: 0; }
-*:first-child + html .payment-status-container .payment-status-action {
+*:first-child + html .submission-status-action {
     zoom: 1; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-action {
+    .submission-status-action {
         position: absolute;
         right: 0;
         width: 210px;
         top: 20px; } }
 @media (min-width: 610px) and (min-width: 610px) {
-    .payment-status-container .payment-status-action {
+    .submission-status-action {
         top: 30px; } }
 @media (min-width: 610px) and (min-width: 710px) {
-    .payment-status-container .payment-status-action {
+    .submission-status-action {
         top: 30px; } }
 @media (min-width: 610px) and (min-width: 1140px) {
-    .payment-status-container .payment-status-action {
+    .submission-status-action {
         top: 40px; } }
 @media (min-width: 610px) and (min-width: 1440px) {
-    .payment-status-container .payment-status-action {
+    .submission-status-action {
         top: 40px; } }
-.payment-status-container .payment-status-action .btn {
+.submission-status-action .btn {
     float: left;
     display: inline-block;
     min-width: 112px;
@@ -1583,30 +1766,30 @@ fieldset {
     padding: 0;
     line-height: 38px; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-action .btn {
+    .submission-status-action .btn {
         padding-right: 20px;
         padding-left: 20px; } }
-.payment-status-container .payment-status-action .btn:hover,
-.payment-status-container .payment-status-action .btn:focus {
+.submission-status-action .btn:hover,
+.submission-status-action .btn:focus {
     background-color: #efbd46;
     color: #182124;
     fill: #182124; }
-.payment-status-container .payment-status-action .btn:hover,
-.payment-status-container .payment-status-action .btn:focus {
+.submission-status-action .btn:hover,
+.submission-status-action .btn:focus {
     border-color: #efbd46; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-action .btn {
+    .submission-status-action .btn {
         width: 100px;
         min-width: 0;
         margin-right: 10px;
         padding: 0; } }
-.payment-status-container .payment-status-action .btn:before {
+.submission-status-action .btn:before {
     vertical-align: middle; }
-.payment-status-container .payment-status-action .btn:last-child {
+.submission-status-action .btn:last-child {
     margin-right: 0; }
-.payment-status-container .payment-status-action .btn.icon--printer.icon--black {
+.submission-status-action .btn.icon--printer.icon--black {
     position: relative; }
-.payment-status-container .payment-status-action .btn.icon--printer.icon--black:before {
+.submission-status-action .btn.icon--printer.icon--black:before {
     display: inline-block;
     width: 22px;
     height: 23px;
@@ -1614,20 +1797,20 @@ fieldset {
     margin-right: 5px;
     background: url("/images/icons/printer-black.png") no-repeat center;
     background-size: 100%; }
-.svg .payment-status-container .payment-status-action .btn.icon--printer.icon--black:before {
+.svg .submission-status-action .btn.icon--printer.icon--black:before {
     background-image: url("/images/icons/printer-black.svg"); }
-.payment-status-container .payment-status-action .btn.icon--printer.icon--black:hover:before,
-.payment-status-container .payment-status-action .btn.icon--printer.icon--black:focus:before {
+.submission-status-action .btn.icon--printer.icon--black:hover:before,
+.submission-status-action .btn.icon--printer.icon--black:focus:before {
     background: url("/images/icons/printer-black.png") no-repeat center;
     background-size: 100%; }
-.svg .payment-status-container .payment-status-action .btn.icon--printer.icon--black:hover:before,
-.svg .payment-status-container .payment-status-action .btn.icon--printer.icon--black:focus:before {
+.svg .submission-status-action .btn.icon--printer.icon--black:hover:before,
+.svg .submission-status-action .btn.icon--printer.icon--black:focus:before {
     background-image: url("/images/icons/printer-black.svg"); }
-.payment-status-container .payment-status-action .btn.icon--email-us:before {
+.submission-status-action .btn.icon--email-us:before {
     margin-top: -2px; }
-.payment-status-container .payment-status-action .btn.icon--email-us.icon--black {
+.submission-status-action .btn.icon--email-us.icon--black {
     position: relative; }
-.payment-status-container .payment-status-action .btn.icon--email-us.icon--black:before {
+.submission-status-action .btn.icon--email-us.icon--black:before {
     display: inline-block;
     width: 19px;
     height: 14px;
@@ -1635,119 +1818,148 @@ fieldset {
     margin-right: 5px;
     background: url("/images/icons/email-us-black.png") no-repeat center;
     background-size: 100%; }
-.svg .payment-status-container .payment-status-action .btn.icon--email-us.icon--black:before {
+.svg .submission-status-action .btn.icon--email-us.icon--black:before {
     background-image: url("/images/icons/email-us-black.svg"); }
-.payment-status-container .payment-status-action .btn.icon--email-us.icon--black:hover:before,
-.payment-status-container .payment-status-action .btn.icon--email-us.icon--black:focus:before {
+.submission-status-action .btn.icon--email-us.icon--black:hover:before,
+.submission-status-action .btn.icon--email-us.icon--black:focus:before {
     background: url("/images/icons/email-us-black.png") no-repeat center;
     background-size: 100%; }
-.svg .payment-status-container .payment-status-action .btn.icon--email-us.icon--black:hover:before,
-.svg .payment-status-container .payment-status-action .btn.icon--email-us.icon--black:focus:before {
+.svg .submission-status-action .btn.icon--email-us.icon--black:hover:before,
+.svg .submission-status-action .btn.icon--email-us.icon--black:focus:before {
     background-image: url("/images/icons/email-us-black.svg"); }
-.payment-status-container .payment-status-meta-group {
+.submission-status-action .btn--screen-reader {
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: rect(0 0 0 0);
+    clip-path: rect(0 0 0 0);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
+
+.submission-datalist-group {
     display: block;
     border-top: 1px solid #ececec;
     padding-right: 20px;
     padding-left: 20px;
     margin-right: -20px;
     margin-left: -20px; }
-.payment-status-container .payment-status-meta-group:after {
+.submission-datalist-group:after {
     display: block;
     visibility: hidden;
     clear: both;
     height: 0;
     content: " ";
     font-size: 0; }
-*:first-child + html .payment-status-container .payment-status-meta-group {
+*:first-child + html .submission-datalist-group {
     zoom: 1; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-right: 30px; } }
 @media (min-width: 710px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-right: 30px; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-right: 40px; } }
 @media (min-width: 1440px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-right: 40px; } }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-left: 30px; } }
 @media (min-width: 710px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-left: 30px; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-left: 40px; } }
 @media (min-width: 1440px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         padding-left: 40px; } }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         margin-right: -30px;
         margin-left: -30px; } }
 @media (min-width: 710px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         margin-right: -30px;
         margin-left: -30px; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         margin-right: -40px;
         margin-left: -40px; } }
 @media (min-width: 1440px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         margin-right: -40px;
         margin-left: -40px; } }
-.payment-status-container .payment-status-meta-group .inner-wrap {
+.submission-datalist-group .inner-wrap {
     min-width: 0; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta-group {
+    .submission-datalist-group {
         margin-right: 0;
         margin-left: 0;
         padding-right: 0;
         padding-left: 0; } }
-.payment-status-container .payment-status-meta-group:first-of-type {
+.submission-datalist-group:first-of-type {
     border-top: none; }
-.payment-status-container .payment-status-meta {
+
+.submission-datalist {
     margin: 28px 0 0;
     padding: 0 0 7px; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta:after {
+    .submission-datalist:after {
         display: block;
         visibility: hidden;
         clear: both;
         height: 0;
         content: " ";
         font-size: 0; }
-    *:first-child + html .payment-status-container .payment-status-meta {
+    *:first-child + html .submission-datalist {
         zoom: 1; } }
-.payment-status-container .payment-status-meta .payment-status-meta-label,
-.payment-status-container .payment-status-meta .payment-status-meta-data,
-.payment-status-container .payment-status-meta .payment-status-meta-edit {
+.submission-status-container--declined .submission-datalist {
+    padding-bottom: 30px; }
+@media (max-width: 609px) {
+    .submission-datalist .btn--restart {
+        position: relative;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%); } }
+@media (min-width: 610px) {
+    .submission-datalist .btn--restart {
+        float: right;
+        margin: 0; } }
+
+.submission-datalist-label,
+.submission-datalist-data,
+.submission-datalist-edit {
     margin-right: 0;
     margin-left: 0; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-label,
-    .payment-status-container .payment-status-meta .payment-status-meta-data,
-    .payment-status-container .payment-status-meta .payment-status-meta-edit {
+    .submission-datalist-label,
+    .submission-datalist-data,
+    .submission-datalist-edit {
         float: left;
         height: 72px;
         margin: 0;
         padding: 0;
         line-height: 72px; } }
-.payment-status-container .payment-status-meta .payment-status-meta-label {
+
+.submission-datalist-label {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 19px;
     font-family: "Proxima Nova W01", Futura, "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
     font-weight: 400; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-label {
+    .submission-datalist-label {
         width: 30%;
         padding: 0; } }
-.payment-status-container .payment-status-meta .payment-status-meta-data {
+
+.submission-datalist-data {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 5px;
@@ -1757,61 +1969,27 @@ fieldset {
     font-size: 1rem;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-data {
+    .submission-datalist-data {
         font-size: 18px;
         font-size: 1.125rem;
         line-height: 1.4em; } }
 @media (min-width: 1140px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-data {
+    .submission-datalist-data {
         font-size: 19px;
         font-size: 1.1875rem;
         line-height: 1.4em; } }
 @media (min-width: 1440px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-data {
+    .submission-datalist-data {
         font-size: 20px;
         font-size: 1.25rem;
         line-height: 1.4em; } }
 @media (min-width: 610px) {
-    .payment-status-container .payment-status-meta .payment-status-meta-data {
+    .submission-datalist-data {
         clear: right;
         width: 70%;
         padding: 0;
         text-align: right;
         line-height: 72px; } }
-@media (min-width: 610px) {
-    .payment-status-container--success .payment-status-description {
-        padding-right: 240px; } }
-.payment-status-container--success .payment-status-title {
-    color: #6eb249; }
-.payment-status-container--success .payment-status-icon.icon--tick-circle {
-    background: url("/images/icons/tick-circle.png") no-repeat center;
-    background-size: 100%; }
-.svg .payment-status-container--success .payment-status-icon.icon--tick-circle {
-    background-image: url("/images/icons/tick-circle.svg"); }
-.payment-status-container--declined .payment-status-title {
-    color: #c21c09; }
-@media (min-width: 610px) {
-    .payment-status-container--declined .payment-status-title {
-        height: 82px;
-        line-height: 82px; } }
-.payment-status-container--declined .payment-status-icon.icon--cross-circle {
-    background: url("/images/icons/cross-circle.png") no-repeat center;
-    background-size: 100%; }
-.svg .payment-status-container--declined .payment-status-icon.icon--cross-circle {
-    background-image: url("/images/icons/cross-circle.svg"); }
-.payment-status-container--declined .payment-status-meta {
-    padding-bottom: 29px; }
-@media (max-width: 609px) {
-    .payment-status-container .btn--restart {
-        position: relative;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%); } }
-@media (min-width: 610px) {
-    .payment-status-container .btn--restart {
-        float: right;
-        margin: 0; } }
 
 /*
  * Promo Header
@@ -2479,27 +2657,47 @@ fieldset {
 /**
  * Review & confirm
  */
-.payment-status-container--review .form-section {
+.submission-status-container--review .form-section {
     width: 100%;
     max-width: none;
     padding: 0; }
 
-.payment-status-container--review .payment-status-meta--review {
+.submission-status-container--review .form-label {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding: 0 0 0 35px;
+    cursor: pointer; }
+
+@media (max-width: 609px) {
+    .submission-status-container--review .btn--confirm {
+        position: relative;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%); } }
+
+@media (min-width: 610px) {
+    .submission-status-container--review .btn--confirm {
+        float: right;
+        margin: 0; } }
+
+.submission-datalist--review {
     margin-top: 0; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-label,
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data,
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+.submission-datalist--review .submission-datalist-label,
+.submission-datalist--review .submission-datalist-data,
+.submission-datalist--review .submission-datalist-edit {
     height: auto;
     margin: 0; }
 @media (max-width: 609px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-label,
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data,
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+    .submission-datalist--review .submission-datalist-label,
+    .submission-datalist--review .submission-datalist-data,
+    .submission-datalist--review .submission-datalist-edit {
         padding-right: 105px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-label {
+.submission-datalist--review .submission-datalist-label {
     position: relative; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-label {
+    .submission-datalist--review .submission-datalist-label {
         clear: both;
         width: 20%;
         min-height: 73px;
@@ -2507,26 +2705,26 @@ fieldset {
         padding-bottom: 15px;
         line-height: 1.4em; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-label span {
+    .submission-datalist--review .submission-datalist-label span {
         display: inline-block;
         position: absolute;
         top: 50%;
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
         transform: translateY(-50%); } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data {
+.submission-datalist--review .submission-datalist-data {
     text-align: left;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data {
+    .submission-datalist--review .submission-datalist-data {
         width: 67%;
         padding: 15px 20px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group {
+.submission-datalist--review .submission-datalist-data .field-group {
     margin: 0; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group--monthyear {
+    .submission-datalist--review .submission-datalist-data .field-group--monthyear {
         padding: 9px 0 0; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group--monthyear .form-input--monthyear {
+.submission-datalist--review .submission-datalist-data .field-group--monthyear .form-input--monthyear {
     max-width: 50px;
     height: auto;
     min-height: 0;
@@ -2534,47 +2732,75 @@ fieldset {
     padding-left: 0;
     border-color: #ffffff;
     text-align: left; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group--monthyear .form-input--monthyear + .form-input--monthyear {
+.submission-datalist--review .submission-datalist-data .field-group--monthyear .form-input--monthyear + .form-input--monthyear {
     border-radius: 0 4px 4px 0; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data label {
-    display: none; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data input {
+.submission-datalist--review .submission-datalist-data .form-label {
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: rect(0 0 0 0);
+    clip-path: rect(0 0 0 0);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
+.submission-datalist--review .submission-datalist-data .form-input {
     font-size: 16px;
     font-size: 1rem;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data input {
+    .submission-datalist--review .submission-datalist-data .form-input {
         font-size: 18px;
         font-size: 1.125rem;
         line-height: 1.4em; } }
 @media (min-width: 1140px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data input {
+    .submission-datalist--review .submission-datalist-data .form-input {
         font-size: 19px;
         font-size: 1.1875rem;
         line-height: 1.4em; } }
 @media (min-width: 1440px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data input {
+    .submission-datalist--review .submission-datalist-data .form-input {
         font-size: 20px;
         font-size: 1.25rem;
         line-height: 1.4em; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data input[readonly] {
+.submission-datalist--review .submission-datalist-data .form-input[readonly] {
     padding-left: 0;
     border: none; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-input-container {
+.submission-datalist--review .submission-datalist-data .form-input-container {
     margin-right: 0; }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-input-container:after {
+    .submission-datalist--review .submission-datalist-data .form-input-container:after {
         display: block;
         visibility: hidden;
         clear: both;
         height: 0;
         content: " ";
         font-size: 0; }
-    *:first-child + html .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-input-container {
+    *:first-child + html .submission-datalist--review .submission-datalist-data .form-input-container {
         zoom: 1; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-tooltip-toggle {
+.submission-datalist--review .submission-datalist-data .form-details--credit-card {
+    margin: 0; }
+@media (min-width: 610px) {
+    .submission-datalist--review .submission-datalist-data .form-details--credit-card {
+        position: static;
+        right: auto;
+        bottom: auto;
+        width: auto;
+        padding: 6px 0 0; } }
+.submission-datalist--review .submission-datalist-data .form-details--credit-card .supported-credit-card {
+    display: inline-block;
+    float: none;
+    width: 38px;
+    height: 30px;
+    margin: 0 8px 0 0; }
+.submission-datalist--review .submission-datalist-data .form-details--credit-card .supported-credit-card.card--active {
+    opacity: 1; }
+.submission-datalist--review .submission-datalist-data .form-input--privacy-toggle {
     display: none; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-tooltip {
+.submission-datalist--review .field-group-tooltip--active .form-tooltip {
+    display: none; }
+.submission-datalist--review .form-tooltip {
     display: none;
     margin-top: 0;
     padding-top: 0;
@@ -2583,109 +2809,43 @@ fieldset {
     font-size: 0.8125rem;
     line-height: 1.4em; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-tooltip {
+    .submission-datalist--review .form-tooltip {
         font-size: 14px;
         font-size: 0.875rem;
         line-height: 1.4em; } }
 @media (min-width: 1140px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-tooltip {
+    .submission-datalist--review .form-tooltip {
         font-size: 15px;
         font-size: 0.9375rem;
         line-height: 1.4em; } }
 @media (min-width: 1440px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-tooltip {
+    .submission-datalist--review .form-tooltip {
         font-size: 16px;
         font-size: 1rem;
         line-height: 1.4em; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    content: "";
-    cursor: pointer;
-    background: url("/images/icons/close-btn-white.png") no-repeat center;
-    background-size: 8px;
-    border-radius: 100%;
-    background-color: #a3a6a7;
-    top: 20px;
-    right: -67px;
-    background-color: #008f9a; }
-.svg .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
-    background-image: url("/images/icons/close-btn-white.svg"); }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
-    background-color: #008f9a; }
-@media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
-        width: 20px;
-        height: 20px; } }
-@media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
-        top: 20px;
-        right: 22px; } }
-@media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
-        top: 25px;
-        right: auto;
-        left: 39%; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip {
-    margin-top: 1em;
-    padding-top: 25px; }
-@media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip {
-        min-height: 114px; } }
-@media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .field-group-tooltip--active .form-tooltip {
-        float: right;
-        position: relative;
-        top: auto;
-        right: auto;
-        width: 52%;
-        margin: 0;
-        -webkit-transform: none;
-        -ms-transform: none;
-        transform: none; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-details--credit-card {
-    margin: 0; }
-@media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-details--credit-card {
-        position: static;
-        right: auto;
-        bottom: auto;
-        width: auto;
-        padding: 6px 0 0; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-details--credit-card .supported-credit-card {
-    display: inline-block;
-    float: none;
-    width: 38px;
-    height: 30px;
-    margin: 0 8px 0 0; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-details--credit-card .supported-credit-card.card--active {
-    opacity: 1; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-data .form-input--privacy-toggle {
-    display: none; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+.submission-datalist--review .submission-datalist-edit {
     line-height: 1.4em; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit:after {
+.submission-datalist--review .submission-datalist-edit:after {
     display: block;
     visibility: hidden;
     clear: both;
     height: 0;
     content: " ";
     font-size: 0; }
-*:first-child + html .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+*:first-child + html .submission-datalist--review .submission-datalist-edit {
     zoom: 1; }
 @media (max-width: 609px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+    .submission-datalist--review .submission-datalist-edit {
         float: right;
         margin: -62px 0 0;
         padding: 3px 0 0; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit {
+    .submission-datalist--review .submission-datalist-edit {
         width: 13%;
         padding-top: 15px;
         padding-bottom: 15px;
         text-align: right; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn {
+.submission-datalist--review .submission-datalist-edit .btn {
     display: inline-block;
     min-width: 112px;
     padding: 10px 20px;
@@ -2703,47 +2863,47 @@ fieldset {
     line-height: 16px;
     min-width: 0; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn {
+    .submission-datalist--review .submission-datalist-edit .btn {
         padding-right: 20px;
         padding-left: 20px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn:hover,
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn:focus {
+.submission-datalist--review .submission-datalist-edit .btn:hover,
+.submission-datalist--review .submission-datalist-edit .btn:focus {
     background-color: #efbd46;
     color: #182124;
     fill: #182124; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn:hover,
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn:focus {
+.submission-datalist--review .submission-datalist-edit .btn:hover,
+.submission-datalist--review .submission-datalist-edit .btn:focus {
     border-color: #efbd46; }
 @media (max-width: 609px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn {
+    .submission-datalist--review .submission-datalist-edit .btn {
         margin: 0;
         padding-right: 20px;
         padding-left: 20px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn--edit {
+.submission-datalist--review .submission-datalist-edit .btn--edit {
     width: 100%;
     max-width: 75px; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn--cancel,
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-edit .btn--save {
+.submission-datalist--review .submission-datalist-edit .btn--cancel,
+.submission-datalist--review .submission-datalist-edit .btn--save {
     display: none; }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-label span {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-label span {
         margin-top: 50px; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-label:first-of-type span {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-label:first-of-type span {
         margin-top: 32px; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data {
         width: 80%;
         padding-top: 18px;
         padding-right: 0;
         padding-bottom: 0; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data:first-of-type {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data:first-of-type {
         padding-top: 0; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear {
         padding-top: 0; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-input {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-input {
     max-width: 150px;
     height: 40px;
     min-height: 40px;
@@ -2752,30 +2912,30 @@ fieldset {
     border-color: inherit;
     text-align: center; }
 @media (max-width: 709px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-input {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-input {
         margin-bottom: 1em; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-input {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-input {
         width: 41%; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-input {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-input {
         width: 50%; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-input:focus {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-input:focus {
     border-color: #008f9a; }
 @media (max-width: 709px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group--monthyear .form-tooltip {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group--monthyear .form-tooltip {
         clear: both; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group .form-input--privacy-toggle {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group .form-input--privacy-toggle {
     display: block; }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-input-container {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-input-container {
         width: 82%; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-input-container {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-input-container {
         float: left;
         width: 42%;
         margin-top: 50px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle {
     display: block;
     width: 30px;
     height: 30px;
@@ -2789,26 +2949,26 @@ fieldset {
     top: 20px;
     right: -67px;
     z-index: 2; }
-.svg .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle {
+.svg .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle {
     background-image: url("/images/icons/help-advice-white.svg"); }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle:hover {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle:hover {
     background-color: #008f9a; }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle {
         width: 20px;
         height: 20px; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle {
         top: 20px;
         right: 22px; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .form-tooltip-toggle {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .form-tooltip-toggle {
         top: 25px;
         right: auto;
         left: 39%; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip {
     display: block; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle {
     display: block;
     width: 30px;
     height: 30px;
@@ -2820,15 +2980,15 @@ fieldset {
     border-radius: 100%;
     background-color: #a3a6a7;
     background-color: #008f9a; }
-.svg .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
+.svg .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle {
     background-image: url("/images/icons/close-btn-white.svg"); }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
     background-color: #008f9a; }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle {
         width: 20px;
         height: 20px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
     width: 30px;
     height: 30px;
     padding: 0;
@@ -2841,72 +3001,99 @@ fieldset {
     top: 20px;
     right: -67px;
     background-color: #a3a6a7; }
-.svg .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+.svg .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
     background-image: url("/images/icons/close-btn-white.svg"); }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover:hover {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover:hover {
     background-color: #008f9a; }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
         width: 20px;
         height: 20px; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
         top: 20px;
         right: 22px; } }
 @media (min-width: 710px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-data .field-group-tooltip--active .form-tooltip-toggle:hover {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-data .field-group-tooltip--active .form-tooltip-toggle:hover {
         top: 25px;
         right: auto;
         left: 39%; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-edit {
     float: none;
     width: 100%;
     margin: 0;
     padding-bottom: 20px; }
 @media (max-width: 609px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit:after {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-edit:after {
         display: block;
         visibility: hidden;
         clear: both;
         height: 0;
         content: " ";
         font-size: 0; }
-    *:first-child + html .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit {
+    *:first-child + html .submission-datalist--review .submission-datalist-group--active .submission-datalist-edit {
         zoom: 1; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit {
+    .submission-datalist--review .submission-datalist-group--active .submission-datalist-edit {
         float: right;
         width: 80%;
         padding-top: 20px;
         padding-left: 20px; } }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit .btn--cancel {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-edit .btn--cancel {
     display: block;
     float: left; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit .btn--save {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-edit .btn--save {
     display: block;
     float: right; }
-.payment-status-container--review .payment-status-meta--review .payment-status-meta-group--active .payment-status-meta-edit .btn--edit {
+.submission-datalist--review .submission-datalist-group--active .submission-datalist-edit .btn--edit {
     display: none; }
-
-@media (max-width: 609px) {
-    .payment-status-container--review .btn--confirm {
-        position: relative;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%); } }
-
+.submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    content: "";
+    cursor: pointer;
+    background: url("/images/icons/close-btn-white.png") no-repeat center;
+    background-size: 8px;
+    border-radius: 100%;
+    background-color: #a3a6a7;
+    top: 20px;
+    right: -67px;
+    background-color: #008f9a; }
+.svg .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle {
+    background-image: url("/images/icons/close-btn-white.svg"); }
+.submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle:hover {
+    background-color: #008f9a; }
+@media (min-width: 710px) {
+    .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle {
+        width: 20px;
+        height: 20px; } }
 @media (min-width: 610px) {
-    .payment-status-container--review .btn--confirm {
+    .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle {
+        top: 20px;
+        right: 22px; } }
+@media (min-width: 710px) {
+    .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip-toggle {
+        top: 25px;
+        right: auto;
+        left: 39%; } }
+.submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip {
+    margin-top: 1em;
+    padding-top: 25px; }
+@media (min-width: 610px) {
+    .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip {
+        min-height: 114px; } }
+@media (min-width: 710px) {
+    .submission-datalist--review .submission-datalist-group--active .field-group-tooltip--active .form-tooltip {
         float: right;
-        margin: 0; } }
-
-.payment-status-container--review label {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding: 0 0 0 35px;
-    cursor: pointer; }
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 52%;
+        margin: 0;
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none; } }
 
 /*
  * Progress Bar
@@ -3064,6 +3251,27 @@ fieldset {
 /**
  * Form layouts
  */
+body:before {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    content: "";
+    -webkit-transition: background 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: background 0.25s cubic-bezier(0.23, 1, 0.32, 1); }
+
+body.modal--active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%; }
+body.modal--active:before {
+    visibility: visible;
+    background: rgba(255, 255, 255, 0.5); }
+
 .inner-wrap {
     width: 100%;
     min-width: 320px;
@@ -3417,3 +3625,76 @@ fieldset {
     margin: -1px;
     padding: 0;
     border: 0; }
+
+.field-group--submit .activity-message {
+    display: none;
+    position: relative;
+    padding-right: 30px;
+    color: #182124; }
+
+.field-group--submit .activity-indicator {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 19px;
+    height: 30px;
+    margin: 0 auto;
+    opacity: 0; }
+.field-group--submit .activity-indicator:after,
+.field-group--submit .activity-indicator:before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 30px;
+    content: ""; }
+.field-group--submit .activity-indicator:after {
+    z-index: 1;
+    background-color: #ffffff; }
+.field-group--submit .activity-indicator:before {
+    z-index: 2;
+    background-color: #182124;
+    -webkit-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-animation: loading 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+    animation: loading 2s cubic-bezier(0.23, 1, 0.32, 1) infinite; }
+.field-group--submit .activity-indicator .icon--lightbulb {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: url("/images/icons/lightbulb.png") no-repeat center;
+    background-size: contain; }
+.svg .field-group--submit .activity-indicator .icon--lightbulb {
+    background-image: url("/images/icons/lightbulb.svg"); }
+
+.field-group--submit .action-message {
+    background: url("/images/icons/lightbulb.png") no-repeat center;
+    background-position: -9999px -9999px; }
+.svg .field-group--submit .action-message {
+    background-image: url("/images/icons/lightbulb.svg"); }
+
+.field-group--submit .form-input--button--active {
+    background-color: #efbd46; }
+.field-group--submit .form-input--button--active .action-message {
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: rect(0 0 0 0);
+    clip-path: rect(0 0 0 0);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
+.field-group--submit .form-input--button--active .activity-message {
+    display: inline-block; }
+.field-group--submit .form-input--button--active .activity-indicator {
+    opacity: 1; }

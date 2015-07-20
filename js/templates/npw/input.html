@@ -1,8 +1,8 @@
-<span ng-class="{'sy-field-wrapper': <%= show %>, 'payment-status-meta-group': '<%= mode %>' === 'read', 'payment-status-meta-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+<span ng-class="{'sy-field-wrapper': <%= show %>, 'submission-datalist-group': '<%= mode %>' === 'read', 'submission-datalist-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
 
-    <dt class="payment-status-meta-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
+    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
 
-    <dd ng-class="{'payment-status-meta-data': '<%= mode %>' === 'read'}">
+    <dd ng-class="{'submission-datalist-data': '<%= mode %>' === 'read'}">
 
         <div class="field-group"
              ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty && <%= form %>.<%= column.name %>.hasVisited}">
@@ -32,7 +32,7 @@
 
     </dd>
 
-    <dd class="payment-status-meta-edit" ng-show="'<%= mode %>' === 'read'">
+    <dd class="submission-datalist-edit" ng-show="'<%= mode %>' === 'read'">
         <button type="button" class="btn btn--cancel" ng-click="columnCtrl.cancelEdit()">Cancel</button>
         <button type="button" class="btn btn--save" ng-click="columnCtrl.saveEdit()">Save</button>
         <button type="button" class="btn btn--edit" ng-hide="<%= column.noEdit %>" ng-click="columnCtrl.startEdit()">Edit</button>

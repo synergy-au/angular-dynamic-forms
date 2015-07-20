@@ -1,0 +1,45 @@
+
+
+<span ng-class="{'sy-field-wrapper': <%= show %>, 'submission-datalist-group': '<%= mode %>' === 'read', 'submission-datalist-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
+
+    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
+
+    <dd ng-class="{'submission-datalist-data': '<%= mode %>' === 'read'}">
+
+        <div class="field-group"
+             ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty && <%= form %>.<%= column.name %>.hasVisited}">
+
+            <div class="form-input-description">
+                <div class="form-input-container">
+                    <label class="form-label" df-label></label>
+                    <input type="text" class="form-input" df-input />
+                </div>
+            </div>
+
+
+            <button type="button" class="form-tooltip-toggle" ng-click="columnCtrl.toggleHelp()">
+                <span>Show help information</span>
+            </button>
+
+            <!--Help-->
+            <div class="form-tooltip" df-help ng-class="{'tooltip--image-with-caption': '<%= column.helpImage %>'}">
+                <img src="" class="tooltip-image" alt=""/>
+                <div class="tooltip-description">
+                    <p></p>
+                </div>
+            </div>
+
+            <!--Validation-->
+            <div class="form-error" df-validation>
+            </div>
+        </div>
+
+    </dd>
+
+    <dd class="submission-datalist-edit" ng-show="'<%= mode %>' === 'read'">
+        <button type="button" class="btn btn--cancel" ng-click="columnCtrl.cancelEdit()">Cancel</button>
+        <button type="button" class="btn btn--save" ng-click="columnCtrl.saveEdit()">Save</button>
+        <button type="button" class="btn btn--edit" ng-hide="<%= column.noEdit %>" ng-click="columnCtrl.startEdit()">Edit</button>
+    </dd>
+
+</span>
