@@ -1,4 +1,4 @@
-angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaService) {
+angular.module('dynamicForms').directive('dfInput', ['$compile', 'DfSchemaService', function($compile, DfSchemaService) {
 
     return {
         restrict: 'A',
@@ -32,4 +32,4 @@ angular.module('dynamicForms').directive('dfInput', function($compile, DfSchemaS
             }
         }
     }
-});
+}]);

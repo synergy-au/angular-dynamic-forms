@@ -1,5 +1,7 @@
 <div sy-form-group data-layout="df-form-<%= mode %>" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
-    <label class="control-label" df-label ng-class="{'label-required': !optional && '<%= mode %>' !== 'read'}"></label>
+    <label class="control-label" for="<%= column.name %>" ng-class="{'label-required': '<%= mode %>' !== 'read' && !('<%= column.optional %>')}">
+        <%= column.label %>
+    </label>
     <div>
         <input type="text" class="form-control" df-input />
 

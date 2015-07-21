@@ -1,4 +1,4 @@
-angular.module('dynamicForms').service('DfUtils', function ($injector) {
+angular.module('dynamicForms').service('DfUtils', ['$injector', function ($injector) {
     var classes = {
         forMode: {
             write: 'df-column-write',
@@ -20,4 +20,4 @@ angular.module('dynamicForms').service('DfUtils', function ($injector) {
     this.getDependency = function(dependencyName) {
         return dependencyName ? $injector.get(dependencyName) : undefined;
     }
-});
+}]);

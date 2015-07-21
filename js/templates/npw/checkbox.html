@@ -1,4 +1,6 @@
 <div class="field-group" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
     <input type="checkbox" class="filter-input" df-input>
-    <label class="filter-label" df-label></label>
+    <label class="filter-label" for="<%= column.name %>">
+        <%= column.label %>
+    </label>
 </div>

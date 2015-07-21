@@ -1,5 +1,5 @@
 // TODO Contain all logic in here.
-angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $injector) {
+angular.module('dynamicForms').service('DfSchemaService', ['$injector', 'DfUtils', function ($injector, DfUtils) {
     var defaults =  $injector.has('dynamicFormDefaults')  ? $injector.get('dynamicFormDefaults') : function(column) {
         return {
             "ng-focus": "columnCtrl.onInputFocus()",
@@ -83,4 +83,4 @@ angular.module('dynamicForms').service('DfSchemaService', function (DfUtils, $in
         var model = element.closestAttribute('df-model-instance');
         return _.template(value)({model: model, controller: controller});
     };
-});
+}]);

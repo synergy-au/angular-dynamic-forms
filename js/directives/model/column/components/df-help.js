@@ -1,4 +1,4 @@
-angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaService) {
+angular.module('dynamicForms').directive('dfHelp', ['$compile', 'DfSchemaService', function($compile, DfSchemaService) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -18,4 +18,4 @@ angular.module('dynamicForms').directive('dfHelp', function($compile, DfSchemaSe
             $compile(element.contents())(scope);
         }
     }
-});
+}]);

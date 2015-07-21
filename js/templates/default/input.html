@@ -1,6 +1,8 @@
 <div class="df-column" df-column="<%= column %>" df-mode="<%= mode %>">
 
-    <label df-label class="df-label"></label>
+    <label for="<%= column.name %>" class="df-label">
+        <%= column.label %>
+    </label>
 
     <div>
         <input df-input class="df-input" />

@@ -1,4 +1,4 @@
-angular.module('dynamicForms').directive('dfModel', function($injector, $templateCache, DfUtils, DfSchemaService) {
+angular.module('dynamicForms').directive('dfModel', ['$injector', '$templateCache', 'DfUtils', 'DfSchemaService', function($injector, $templateCache, DfUtils, DfSchemaService) {
     function getTemplateDirectory(tAttrs) {
         if (tAttrs.dfTemplate) {
             return tAttrs.dfTemplate;
@@ -31,4 +31,4 @@ angular.module('dynamicForms').directive('dfModel', function($injector, $templat
             });
         }
     }
-});
+}]);

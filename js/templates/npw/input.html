@@ -1,6 +1,8 @@
 <span ng-class="{'sy-field-wrapper': <%= show %>, 'submission-datalist-group': '<%= mode %>' === 'read', 'submission-datalist-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
 
-    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
+    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span for="<%= column.name %>">
+        <%= column.label %>
+    </span></dt>
 
     <dd ng-class="{'submission-datalist-data': '<%= mode %>' === 'read'}">
 
@@ -8,7 +10,9 @@
              ng-class="{'field-group-tooltip--active': columnCtrl.displayHelp(), 'field-group--error': <%= form %>.<%= column.name %>.$invalid && <%= form %>.<%= column.name %>.$dirty && <%= form %>.<%= column.name %>.hasVisited}">
 
             <div class="form-input-container">
-                <label class="form-label" df-label></label>
+                <label class="form-label" for="<%= column.name %>">
+                    <%= column.label %>
+                </label>
                 <input type="text" class="form-input" df-input />
             </div>
 

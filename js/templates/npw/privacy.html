@@ -2,7 +2,9 @@
 
 <span ng-class="{'sy-field-wrapper': <%= show %>, 'submission-datalist-group': '<%= mode %>' === 'read', 'submission-datalist-group--active': columnCtrl.inEdit()}" df-column="<%= column.name %>" df-mode="<%= mode %>" ng-show="<%= show %>">
 
-    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span df-label></span></dt>
+    <dt class="submission-datalist-label" ng-show="'<%= mode %>' === 'read'"><span for="<%= column.name %>">
+        <%= column.label %>
+    </span></dt>
 
     <dd ng-class="{'submission-datalist-data': '<%= mode %>' === 'read'}">
 
@@ -11,7 +13,9 @@
 
             <div class="form-input-description">
                 <div class="form-input-container">
-                    <label class="form-label" df-label></label>
+                    <label class="form-label" for="<%= column.name %>">
+                        <%= column.label %>
+                    </label>
                     <input type="text" class="form-input" df-input />
                 </div>
             </div>
