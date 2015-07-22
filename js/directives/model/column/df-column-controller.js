@@ -7,13 +7,19 @@ angular.module('dynamicForms').controller('DfColumnController', ['$scope', '$ele
         currentMode: $element.closestAttribute( 'df-mode' ) || 'write',
         element: $element,
         input: undefined,
+        editable: true,
         savedValue: undefined,
         help: false
     };
 
-    this.registerInput = function(inputElem) {
+    this.registerInput = function(inputElem, editable) {
         model.input = inputElem;
+        model.editable = _.isUndefined(editable) ? model.editable : editable;
         toggleInputMode(model.currentMode);
+    };
+
+    this.allowEdit  = function () {
+        return model.editable;
     };
 
     this.startEdit  = function () {

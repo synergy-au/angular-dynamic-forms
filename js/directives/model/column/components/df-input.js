@@ -27,7 +27,7 @@ angular.module('dynamicForms').directive('dfInput', ['$compile', 'DfSchemaServic
                     $compile(iElem)(scope);
                 },
                 post: function(scope, iElem, iAttrs, columnCtrl){
-                    columnCtrl.registerInput(iElem);
+                    columnCtrl.registerInput(iElem, props.columnDetails.editable);
                 }
             }
         }

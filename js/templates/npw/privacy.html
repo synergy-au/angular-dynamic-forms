@@ -40,10 +40,10 @@
 
     </dd>
 
-    <dd class="submission-datalist-edit" ng-show="'<%= mode %>' === 'read'">
+    <dd class="submission-datalist-edit" ng-show="columnCtrl.isReadonly() || columnCtrl.inEdit()">
         <button type="button" class="btn btn--cancel" ng-click="columnCtrl.cancelEdit()">Cancel</button>
         <button type="button" class="btn btn--save" ng-click="columnCtrl.saveEdit()">Save</button>
-        <button type="button" class="btn btn--edit" ng-hide="<%= column.noEdit %>" ng-click="columnCtrl.startEdit()">Edit</button>
+        <button type="button" class="btn btn--edit" ng-show="columnCtrl.allowEdit()" ng-click="columnCtrl.startEdit()">Edit</button>
     </dd>
 
 </span>
